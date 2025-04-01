@@ -1,0 +1,66 @@
+/* Center the register form */
+.register-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Style the form heading */
+.register-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Style input fields */
+.register-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Style buttons */
+.register-container button {
+  width: 48%;
+  padding: 10px;
+  margin: 10px 1%;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Register button styling */
+.register-container button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.register-container button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Login button styling */
+.register-container button[type="button"] {
+  background-color: #007bff;
+  color: white;
+}
+
+.register-container button[type="button"]:hover {
+  background-color: #0056b3;
+}
+
+/* Error message styling */
+.register-container p {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}

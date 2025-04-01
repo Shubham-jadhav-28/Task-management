@@ -1,12 +1,25 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet,NgIf,FormsModule,RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
   title = 'Task-management';
+  constructor(private authService: AuthService, private router: Router) {}
+
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

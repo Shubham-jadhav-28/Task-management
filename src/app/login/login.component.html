@@ -1,0 +1,52 @@
+<div class="login-container">
+  <h2>Login</h2>
+
+  <!-- Default Image -->
+  <div class="login-image">
+    <!-- <img src="avtar.jpg" alt="Login Image" height="100px" width="100px" /> -->
+
+    <img
+      src="https://static.vecteezy.com/system/resources/previews/024/183/535/original/male-avatar-portrait-of-a-young-man-with-glasses-illustration-of-male-character-in-modern-color-style-vector.jpg"
+      alt="Login Image"
+      height="100px"
+      width="100px"
+    />
+  </div>
+  <!-- Login Form -->
+  <form (ngSubmit)="login()">
+    <div class="input-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        id="username"
+        [(ngModel)]="username"
+        name="username"
+        required
+      />
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        id="password"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </div>
+    <button type="submit" [disabled]="!username || !password">Login</button>
+  </form>
+
+  <!-- Sign Up Link -->
+  <div class="signup-link">
+    <p>
+      Don't have an account?
+      <a href="javascript:void(0)" (click)="goToSignUp()">Sign Up</a>
+    </p>
+  </div>
+
+  <!-- Welcome Message -->
+  <div *ngIf="isLoggedIn()" class="welcome-message">
+    <p>Welcome, {{ getUsername() }}!</p>
+  </div>
+</div>

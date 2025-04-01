@@ -1,0 +1,117 @@
+<div class="project-container">
+  <!-- Logout Button -->
+  <button (click)="logout()" class="logout-button">Logout</button>
+
+  <h2>Create a New Project</h2>
+  <form (ngSubmit)="createProject()" #projectForm="ngForm">
+    <div class="input-group">
+      <label for="title">Project Title</label>
+      <input
+        type="text"
+        id="title"
+        [(ngModel)]="project.title"
+        name="title"
+        #title="ngModel"
+        required
+      />
+      <div *ngIf="title.invalid && title.touched" class="error">
+        Project Title is required.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        [(ngModel)]="project.description"
+        name="description"
+        #description="ngModel"
+        required
+      ></textarea>
+      <div *ngIf="description.invalid && description.touched" class="error">
+        Description is required.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="createdBy">Created By</label>
+      <input
+        type="text"
+        id="createdBy"
+        [(ngModel)]="project.createdBy"
+        name="createdBy"
+        #createdBy="ngModel"
+        required
+      />
+      <div *ngIf="createdBy.invalid && createdBy.touched" class="error">
+        Created By is required.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="manager">Project Manager</label>
+      <input
+        type="text"
+        id="manager"
+        [(ngModel)]="project.manager"
+        name="manager"
+        #manager="ngModel"
+        required
+      />
+      <div *ngIf="manager.invalid && manager.touched" class="error">
+        Project Manager is required.
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="startDate">Start Date</label>
+      <input
+        type="date"
+        id="startDate"
+        [(ngModel)]="project.startDate"
+        name="startDate"
+        #startDate="ngModel"
+        required
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="endDate">End Date</label>
+      <input
+        type="date"
+        id="endDate"
+        [(ngModel)]="project.endDate"
+        name="endDate"
+        #endDate="ngModel"
+        required
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="teamMembers">Team Members</label>
+      <input
+        type="text"
+        id="teamMembers"
+        [(ngModel)]="project.teamMembers"
+        name="teamMembers"
+        #teamMembers="ngModel"
+      />
+    </div>
+
+    <div class="input-group">
+      <label for="dueDate">Due Date</label>
+      <input
+        type="date"
+        id="dueDate"
+        [(ngModel)]="project.dueDate"
+        name="dueDate"
+        #dueDate="ngModel"
+        required
+      />
+    </div>
+
+    <button type="submit" [disabled]="projectForm.invalid">
+      Create Project
+    </button>
+  </form>
+</div>
