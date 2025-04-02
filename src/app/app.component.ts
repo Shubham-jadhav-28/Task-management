@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet,NgIf,FormsModule,RouterLink],
@@ -14,8 +15,8 @@ export class AppComponent {
   title = 'Task-management';
   constructor(private authService: AuthService, private router: Router) {}
 
-  isLoggedIn(): boolean {
-    return this.authService.isAuthenticated();
+  isLoginPage(): boolean {
+    return this.router.url === '/login';
   }
 
   logout() {

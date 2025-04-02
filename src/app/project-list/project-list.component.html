@@ -1,0 +1,45 @@
+<div class="container mt-4">
+  <!-- Logout Button -->
+
+  <h2 class="mb-4">Projects</h2>
+  <div *ngIf="isLoggedIn()" class="welcome-message">
+    <p>Welcome, {{ getUsername() }}!</p>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Created By</th>
+          <th>Manager</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Team Members</th>
+          <th>Due Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let project of projects">
+          <td>{{ project.title }}</td>
+          <td>{{ project.description }}</td>
+          <td>{{ project.createdBy }}</td>
+          <td>{{ project.manager }}</td>
+          <td>{{ project.startDate }}</td>
+          <td>{{ project.endDate }}</td>
+          <td>{{ project.teamMembers }}</td>
+          <td>{{ project.dueDate }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <button (click)="logout()" class="btn btn-danger mb-3">Logout</button>
+  </div>
+  <a
+    routerLink="/create-project"
+    (click)="createProject()"
+    class="btn btn-primary mt-3"
+    >Create New Project</a
+  >
+</div>

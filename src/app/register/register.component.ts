@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  imports: [FormsModule,NgIf],
+  imports: [FormsModule,NgIf,RouterLink,RouterLinkActive],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
   username: string = '';
   password: string = '';
-  email: String = ''
+  email: string = ''
   errorMessage?: string; 
   constructor(private authService: AuthService, public router: Router) {}
 
@@ -25,4 +25,5 @@ export class RegisterComponent {
       this.errorMessage = 'Registration failed. Please try again.';
   }
 }
+
 }

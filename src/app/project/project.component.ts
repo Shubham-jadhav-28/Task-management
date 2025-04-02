@@ -22,23 +22,26 @@ export class ProjectComponent {
     dueDate: ''
   };
   authService: any;
-
+  projects: any[] = [];
   constructor(private router: Router) {} 
   createProject(): void {
+    
     //  local storage
     console.log('Project Created:', this.project);
     alert('Project Created!');
-      this.router.navigate(['/project/1/task-list']);
+   localStorage.setItem('projectData', JSON.stringify(this.project));
+
     
+    this.router.navigate(['/project-list'])
+     
   }
 
   logout(): void {
    
     localStorage.removeItem('user'); 
-    alert('Logged out successfully!');
-
-    // Redirect to login page
+   
     this.router.navigate(['/login']);
   }
+  
   
 }

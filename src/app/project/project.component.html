@@ -1,72 +1,80 @@
-<div class="project-container">
+<div class="container mt-4">
   <!-- Logout Button -->
-  <button (click)="logout()" class="logout-button">Logout</button>
+  <button (click)="logout()" class="btn btn-danger mb-3">Logout</button>
 
-  <h2>Create a New Project</h2>
+  <h2 class="mb-4">Create a New Project</h2>
   <form (ngSubmit)="createProject()" #projectForm="ngForm">
-    <div class="input-group">
-      <label for="title">Project Title</label>
+    <div class="mb-3">
+      <label for="title" class="form-label">Project Title</label>
       <input
         type="text"
+        class="form-control"
         id="title"
         [(ngModel)]="project.title"
         name="title"
         #title="ngModel"
         required
       />
-      <div *ngIf="title.invalid && title.touched" class="error">
+      <div *ngIf="title.invalid && title.touched" class="text-danger">
         Project Title is required.
       </div>
     </div>
 
-    <div class="input-group">
-      <label for="description">Description</label>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
       <textarea
+        class="form-control"
         id="description"
         [(ngModel)]="project.description"
         name="description"
         #description="ngModel"
         required
       ></textarea>
-      <div *ngIf="description.invalid && description.touched" class="error">
+      <div
+        *ngIf="description.invalid && description.touched"
+        class="text-danger"
+      >
         Description is required.
       </div>
     </div>
 
-    <div class="input-group">
-      <label for="createdBy">Created By</label>
+    <div class="mb-3">
+      <label for="createdBy" class="form-label">Created By</label>
       <input
         type="text"
+        class="form-control"
         id="createdBy"
         [(ngModel)]="project.createdBy"
         name="createdBy"
         #createdBy="ngModel"
         required
       />
-      <div *ngIf="createdBy.invalid && createdBy.touched" class="error">
+      <div *ngIf="createdBy.invalid && createdBy.touched" class="text-danger">
         Created By is required.
       </div>
     </div>
 
-    <div class="input-group">
-      <label for="manager">Project Manager</label>
+    <div class="mb-3">
+      <label for="manager" class="form-label">Project Manager</label>
       <input
         type="text"
+        class="form-control"
         id="manager"
         [(ngModel)]="project.manager"
         name="manager"
         #manager="ngModel"
         required
       />
-      <div *ngIf="manager.invalid && manager.touched" class="error">
+      <div *ngIf="manager.invalid && manager.touched" class="text-danger">
         Project Manager is required.
       </div>
     </div>
 
-    <div class="input-group">
-      <label for="startDate">Start Date</label>
+    <div class="mb-3">
+      <label for="startDate" class="form-label">Start Date</label>
       <input
         type="date"
+        class="form-control"
         id="startDate"
         [(ngModel)]="project.startDate"
         name="startDate"
@@ -75,10 +83,11 @@
       />
     </div>
 
-    <div class="input-group">
-      <label for="endDate">End Date</label>
+    <div class="mb-3">
+      <label for="endDate" class="form-label">End Date</label>
       <input
         type="date"
+        class="form-control"
         id="endDate"
         [(ngModel)]="project.endDate"
         name="endDate"
@@ -87,10 +96,11 @@
       />
     </div>
 
-    <div class="input-group">
-      <label for="teamMembers">Team Members</label>
+    <div class="mb-3">
+      <label for="teamMembers" class="form-label">Team Members</label>
       <input
         type="text"
+        class="form-control"
         id="teamMembers"
         [(ngModel)]="project.teamMembers"
         name="teamMembers"
@@ -98,10 +108,11 @@
       />
     </div>
 
-    <div class="input-group">
-      <label for="dueDate">Due Date</label>
+    <div class="mb-3">
+      <label for="dueDate" class="form-label">Due Date</label>
       <input
         type="date"
+        class="form-control"
         id="dueDate"
         [(ngModel)]="project.dueDate"
         name="dueDate"
@@ -110,8 +121,12 @@
       />
     </div>
 
-    <button type="submit" [disabled]="projectForm.invalid">
-      Create Project
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="projectForm.invalid"
+    >
+      Submit
     </button>
   </form>
 </div>

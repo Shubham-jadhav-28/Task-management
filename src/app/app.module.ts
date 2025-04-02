@@ -4,16 +4,18 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
+import { ProjectListComponent } from './project-list/project-list.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ProjectListComponent
 ],
   imports: [
-    BrowserModule,FormsModule,  CommonModule
+    BrowserModule,FormsModule,CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

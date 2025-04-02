@@ -1,4 +1,3 @@
-/* Center the register form */
 .register-container {
   width: 100%;
   max-width: 400px;
@@ -10,13 +9,11 @@
   text-align: center;
 }
 
-/* Style the form heading */
 .register-container h2 {
   margin-bottom: 20px;
   color: #333;
 }
 
-/* Style input fields */
 .register-container input {
   width: 100%;
   padding: 10px;
@@ -26,7 +23,6 @@
   font-size: 16px;
 }
 
-/* Style buttons */
 .register-container button {
   width: 48%;
   padding: 10px;
@@ -38,7 +34,6 @@
   transition: 0.3s;
 }
 
-/* Register button styling */
 .register-container button[type="submit"] {
   background-color: #28a745;
   color: white;
@@ -48,7 +43,6 @@
   background-color: #218838;
 }
 
-/* Login button styling */
 .register-container button[type="button"] {
   background-color: #007bff;
   color: white;
@@ -58,9 +52,16 @@
   background-color: #0056b3;
 }
 
-/* Error message styling */
 .register-container p {
   color: red;
   font-weight: bold;
   margin-top: 10px;
+}
+.login {
+  text-decoration: none;
+}
+.active-link {
+  color: blue;
+  font-weight: bold;
+  text-decoration: underline;
 }
