@@ -10,7 +10,7 @@
         type="text"
         class="form-control"
         id="title"
-        [(ngModel)]="project.title"
+        [(ngModel)]="projects.title"
         name="title"
         #title="ngModel"
         required
@@ -25,7 +25,7 @@
       <textarea
         class="form-control"
         id="description"
-        [(ngModel)]="project.description"
+        [(ngModel)]="projects.description"
         name="description"
         #description="ngModel"
         required
@@ -44,7 +44,7 @@
         type="text"
         class="form-control"
         id="createdBy"
-        [(ngModel)]="project.createdBy"
+        [(ngModel)]="projects.createdBy"
         name="createdBy"
         #createdBy="ngModel"
         required
@@ -60,7 +60,7 @@
         type="text"
         class="form-control"
         id="manager"
-        [(ngModel)]="project.manager"
+        [(ngModel)]="projects.manager"
         name="manager"
         #manager="ngModel"
         required
@@ -76,11 +76,14 @@
         type="date"
         class="form-control"
         id="startDate"
-        [(ngModel)]="project.startDate"
+        [(ngModel)]="projects.startDate"
         name="startDate"
         #startDate="ngModel"
         required
       />
+      <div *ngIf="startDate.invalid && startDate.touched" class="text-danger">
+        Start Date is required.
+      </div>
     </div>
 
     <div class="mb-3">
@@ -89,7 +92,7 @@
         type="date"
         class="form-control"
         id="endDate"
-        [(ngModel)]="project.endDate"
+        [(ngModel)]="projects.endDate"
         name="endDate"
         #endDate="ngModel"
         required
@@ -102,7 +105,7 @@
         type="text"
         class="form-control"
         id="teamMembers"
-        [(ngModel)]="project.teamMembers"
+        [(ngModel)]="projects.teamMembers"
         name="teamMembers"
         #teamMembers="ngModel"
       />
@@ -114,7 +117,7 @@
         type="date"
         class="form-control"
         id="dueDate"
-        [(ngModel)]="project.dueDate"
+        [(ngModel)]="projects.dueDate"
         name="dueDate"
         #dueDate="ngModel"
         required
@@ -127,6 +130,10 @@
       [disabled]="projectForm.invalid"
     >
       Submit
+    </button>
+    <br />
+    <button type="button" class="btn btn-primary" (click)="cancelProject()">
+      Cancel
     </button>
   </form>
 </div>

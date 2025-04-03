@@ -13,6 +13,7 @@ import { NgIf } from '@angular/common';
 export class LoginComponent {
   username: string = '';
   password:string = '';
+ 
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -35,4 +36,6 @@ export class LoginComponent {
  getUsername(): string | null {
   return this.authService.getUsername();
 }
+
+
 }

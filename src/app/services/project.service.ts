@@ -9,7 +9,7 @@ export class ProjectService {
   constructor() {}
 
   getProjects() {
-    return this.projects;
+    return JSON.parse(localStorage.getItem('projectData') || '[]');
   }
 
   addProject(project: any) {

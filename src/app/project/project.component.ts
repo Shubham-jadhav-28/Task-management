@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-project',
@@ -11,7 +12,7 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './project.component.css'
 })
 export class ProjectComponent {
-  project = {
+  projects = {
     title: '',
     description: '',
     createdBy: '',
@@ -19,29 +20,46 @@ export class ProjectComponent {
     startDate: '',
     endDate: '',
     teamMembers: '',
-    dueDate: ''
+    dueDate: '',
+    tasks: []
   };
   authService: any;
-  projects: any[] = [];
-  constructor(private router: Router) {} 
+
+  constructor(private router: Router,private projectService: ProjectService) {} 
   createProject(): void {
     
-    //  local storage
-    console.log('Project Created:', this.project);
+    let projects = JSON.parse(localStorage.getItem('projectData') || '[]');
+   if (!Array.isArray(projects)) {
+    projects=[];
+   }
+  
+    projects.push(this.projects);
+  
+    localStorage.setItem('projectData', JSON.stringify(projects));
+  
+    console.log('Project Created:', this.projects);
     alert('Project Created!');
-   localStorage.setItem('projectData', JSON.stringify(this.project));
+  
+   
+    this.router.navigate(['/project-list']);
+  }
+  
 
-    
+  cancelProject(){
     this.router.navigate(['/project-list'])
-     
   }
 
   logout(): void {
-   
     localStorage.removeItem('user'); 
-   
     this.router.navigate(['/login']);
   }
-  
+  isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+
+ getUsername(): string | null {
+  return this.authService.getUsername();
+}
   
 }

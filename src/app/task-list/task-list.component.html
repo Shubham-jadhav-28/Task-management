@@ -68,5 +68,9 @@
     <button type="submit" [disabled]="!task.title || !task.assignedTo">
       Create Task
     </button>
+    <br />
+    <button type="button" class="btn btn-primary" (click)="cancelTask()">
+      Cancel
+    </button>
   </form>
 </div>
