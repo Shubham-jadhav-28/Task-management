@@ -1,0 +1,150 @@
+<div class="container mt-4">
+  <!-- Project Details Section -->
+  <div *ngIf="selectedProject" class="project-details mt-4">
+    <div class="card shadow-sm p-4">
+      <h3 class="mb-4 text-primary">Project Details</h3>
+
+      <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <th scope="row">Title</th>
+            <td>{{ selectedProject.title }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Description</th>
+            <td>{{ selectedProject.description }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Created By</th>
+            <td>{{ selectedProject.createdBy }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Manager</th>
+            <td>{{ selectedProject.manager }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Start Date</th>
+            <td>{{ selectedProject.startDate }}</td>
+          </tr>
+          <tr>
+            <th scope="row">End Date</th>
+            <td>{{ selectedProject.endDate }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Team Members</th>
+            <td>{{ selectedProject.teamMembers }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Due Date</th>
+            <td>{{ selectedProject.dueDate }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-flex gap-2 mt-3">
+        <button class="btn btn-secondary" (click)="closeProjectDetails()">
+          Back to Projects
+        </button>
+        <button class="btn btn-warning" (click)="editProject()">Edit</button>
+      </div>
+
+      <!-- Edit Project Form -->
+      <div class="card p-4 shadow-lg mt-5 bg-light" *ngIf="isEditing">
+        <h2 class="mb-3 text-primary">Edit Project</h2>
+        <form (ngSubmit)="updateProject()">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Title</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedProject.title"
+                name="title"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Description</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedProject.description"
+                name="description"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Manager</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedProject.manager"
+                name="manager"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Start Date</label>
+              <input
+                type="date"
+                class="form-control"
+                [(ngModel)]="selectedProject.startDate"
+                name="startDate"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">End Date</label>
+              <input
+                type="date"
+                class="form-control"
+                [(ngModel)]="selectedProject.endDate"
+                name="endDate"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Team Members</label>
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="selectedProject.teamMembers"
+                name="teamMembers"
+                required
+              />
+            </div>
+
+            <div class="col-md-6">
+              <label class="form-label">Due Date</label>
+              <input
+                type="date"
+                class="form-control"
+                [(ngModel)]="selectedProject.dueDate"
+                name="dueDate"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="d-flex mt-4 gap-3">
+            <button type="submit" class="btn btn-success">
+              Update Project
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="closeProjectDetails()"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

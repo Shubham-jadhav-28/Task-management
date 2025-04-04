@@ -4,6 +4,8 @@ import { RegisterComponent } from './register/register.component';
 import { ProjectComponent } from './project/project.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectListComponent } from './project-list/project-list.component';
+import { ProjectDetailsComponent } from './project-details/project-details.component';
+import { TaskDetailsComponent } from './task-details/task-details.component';
 
 
 export const routes: Routes = [
@@ -12,5 +14,7 @@ export const routes: Routes = [
     {path:'register',component:RegisterComponent},
     {path:'project',component:ProjectComponent},
     {path:'project-list',component:ProjectListComponent},
-    { path: 'task-list', component: TaskListComponent }
+    { path: 'task-list', component: TaskListComponent },
+    {path:'project-details',component:ProjectDetailsComponent},
+    {path:'task-details',component:TaskDetailsComponent}
 ]

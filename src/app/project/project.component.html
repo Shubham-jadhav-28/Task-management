@@ -1,139 +1,169 @@
 <div class="container mt-4">
   <!-- Logout Button -->
-  <button (click)="logout()" class="btn btn-danger mb-3">Logout</button>
 
-  <h2 class="mb-4">Create a New Project</h2>
+  <h2 class="p-5 text-primary">Create a New Project</h2>
+
   <form (ngSubmit)="createProject()" #projectForm="ngForm">
-    <div class="mb-3">
-      <label for="title" class="form-label">Project Title</label>
-      <input
-        type="text"
-        class="form-control"
-        id="title"
-        [(ngModel)]="projects.title"
-        name="title"
-        #title="ngModel"
-        required
-      />
-      <div *ngIf="title.invalid && title.touched" class="text-danger">
-        Project Title is required.
+    <div class="container shadow-lg p-5 mb-4 bg-white rounded">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label for="title" class="form-label">Project Title</label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              [(ngModel)]="projects.title"
+              name="title"
+              #title="ngModel"
+              required
+            />
+            <div *ngIf="title.invalid && title.touched" class="text-danger">
+              Project Title is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="description"
+              [(ngModel)]="projects.description"
+              name="description"
+              #description="ngModel"
+              required
+            ></textarea>
+            <div
+              *ngIf="description.invalid && description.touched"
+              class="text-danger"
+            >
+              Description is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label for="teamMembers" class="form-label">Team Members</label>
+            <input
+              type="text"
+              class="form-control"
+              id="teamMembers"
+              [(ngModel)]="projects.teamMembers"
+              name="teamMembers"
+              #teamMembers="ngModel"
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="createdBy" class="form-label">Created By</label>
+            <input
+              type="text"
+              class="form-control"
+              id="createdBy"
+              [(ngModel)]="projects.createdBy"
+              name="createdBy"
+              #createdBy="ngModel"
+              required
+              readonly
+            />
+            <div
+              *ngIf="createdBy.invalid && createdBy.touched"
+              class="text-danger"
+            >
+              Created By is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="manager" class="form-label">Project Manager</label>
+            <input
+              type="text"
+              class="form-control"
+              id="manager"
+              [(ngModel)]="projects.manager"
+              name="manager"
+              #manager="ngModel"
+              required
+            />
+            <div *ngIf="manager.invalid && manager.touched" class="text-danger">
+              Project Manager is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="startDate"
+              [(ngModel)]="projects.startDate"
+              name="startDate"
+              #startDate="ngModel"
+              required
+            />
+            <div
+              *ngIf="startDate.invalid && startDate.touched"
+              class="text-danger"
+            >
+              Start Date is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="endDate" class="form-label">End Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="endDate"
+              [(ngModel)]="projects.endDate"
+              name="endDate"
+              #endDate="ngModel"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="mb-3">
+            <label for="dueDate" class="form-label">Due Date</label>
+            <input
+              type="date"
+              class="form-control"
+              id="dueDate"
+              [(ngModel)]="projects.dueDate"
+              name="dueDate"
+              #dueDate="ngModel"
+              required
+            />
+          </div>
+        </div>
+
+        <div class="row">
+          <div
+            class="col-md-12 d-flex justify-content-center align-items-center gap-2 mt-3"
+          >
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="projectForm.invalid"
+            >
+              Submit
+            </button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="cancelProject()"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="mb-3">
-      <label for="description" class="form-label">Description</label>
-      <textarea
-        class="form-control"
-        id="description"
-        [(ngModel)]="projects.description"
-        name="description"
-        #description="ngModel"
-        required
-      ></textarea>
-      <div
-        *ngIf="description.invalid && description.touched"
-        class="text-danger"
-      >
-        Description is required.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="createdBy" class="form-label">Created By</label>
-      <input
-        type="text"
-        class="form-control"
-        id="createdBy"
-        [(ngModel)]="projects.createdBy"
-        name="createdBy"
-        #createdBy="ngModel"
-        required
-      />
-      <div *ngIf="createdBy.invalid && createdBy.touched" class="text-danger">
-        Created By is required.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="manager" class="form-label">Project Manager</label>
-      <input
-        type="text"
-        class="form-control"
-        id="manager"
-        [(ngModel)]="projects.manager"
-        name="manager"
-        #manager="ngModel"
-        required
-      />
-      <div *ngIf="manager.invalid && manager.touched" class="text-danger">
-        Project Manager is required.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="startDate" class="form-label">Start Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="startDate"
-        [(ngModel)]="projects.startDate"
-        name="startDate"
-        #startDate="ngModel"
-        required
-      />
-      <div *ngIf="startDate.invalid && startDate.touched" class="text-danger">
-        Start Date is required.
-      </div>
-    </div>
-
-    <div class="mb-3">
-      <label for="endDate" class="form-label">End Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="endDate"
-        [(ngModel)]="projects.endDate"
-        name="endDate"
-        #endDate="ngModel"
-        required
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="teamMembers" class="form-label">Team Members</label>
-      <input
-        type="text"
-        class="form-control"
-        id="teamMembers"
-        [(ngModel)]="projects.teamMembers"
-        name="teamMembers"
-        #teamMembers="ngModel"
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="dueDate" class="form-label">Due Date</label>
-      <input
-        type="date"
-        class="form-control"
-        id="dueDate"
-        [(ngModel)]="projects.dueDate"
-        name="dueDate"
-        #dueDate="ngModel"
-        required
-      />
-    </div>
-
-    <button
-      type="submit"
-      class="btn btn-primary"
-      [disabled]="projectForm.invalid"
-    >
-      Submit
-    </button>
-    <br />
-    <button type="button" class="btn btn-primary" (click)="cancelProject()">
-      Cancel
-    </button>
   </form>
 </div>

@@ -7,7 +7,7 @@ import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-project',
-  imports: [RouterLink,NgIf,FormsModule],
+  imports: [RouterLink, NgIf, FormsModule],
   templateUrl: './project.component.html',
   styleUrl: './project.component.css'
 })
@@ -24,33 +24,40 @@ export class ProjectComponent {
     tasks: []
   };
   authService: any;
+ 
 
-  constructor(private router: Router,private projectService: ProjectService) {} 
+  constructor(private router: Router, private projectService: ProjectService) { }
+  ngOnInit() {
+    const username = localStorage.getItem('username');
+    if (username) {
+      this.projects.createdBy = username;
+    }
+  }
   createProject(): void {
-    
+
     let projects = JSON.parse(localStorage.getItem('projectData') || '[]');
-   if (!Array.isArray(projects)) {
-    projects=[];
-   }
-  
+    if (!Array.isArray(projects)) {
+      projects = [];
+    }
+
     projects.push(this.projects);
-  
+
     localStorage.setItem('projectData', JSON.stringify(projects));
-  
+
     console.log('Project Created:', this.projects);
     alert('Project Created!');
-  
-   
-    this.router.navigate(['/project-list']);
-  }
-  
 
-  cancelProject(){
+
+    this.router.navigate(['/project-details']);
+  }
+
+
+  cancelProject() {
     this.router.navigate(['/project-list'])
   }
 
   logout(): void {
-    localStorage.removeItem('user'); 
+    localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
   isLoggedIn(): boolean {
@@ -58,8 +65,8 @@ export class ProjectComponent {
   }
 
 
- getUsername(): string | null {
-  return this.authService.getUsername();
-}
-  
+  getUsername(): string | null {
+    return this.authService.getUsername();
+  }
+
 }

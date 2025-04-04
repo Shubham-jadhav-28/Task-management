@@ -19,6 +19,7 @@ export class LoginComponent {
 
   login(): void {
     if (this.authService.login(this.username, this.password)) {
+      localStorage.setItem('username', this.username.trim());
       this.router.navigate(['/project-list']);
     } else {
       alert('Invalid credentials');
