@@ -7,7 +7,7 @@ export class ProjectService {
   getProjectById(_projectId: string): any {
     throw new Error('Method not implemented.');
   }
-  private projects: any[] = []; // Store projects
+  private projects: any[] = []; 
 
   constructor() {}
 
