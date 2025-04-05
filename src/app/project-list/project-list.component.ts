@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 @Component({
@@ -10,22 +10,24 @@ import { Router, RouterOutlet } from '@angular/router';
 })
 export class ProjectListComponent implements OnInit {
  
- 
+  projects: any[] = [];
   userProjects: any[] = [];
   selectedProject: any = null;
   username: string | null = null;
-  isEditing: boolean | undefined;
+  isEditing: boolean = false;
 
-  constructor(private router: Router) {}
 
+  constructor(private router: Router,private cdr: ChangeDetectorRef) {}
   ngOnInit(): void {
-    
     this.username = localStorage.getItem('username');
-
     const storedProjects = localStorage.getItem('projectData');
     const allProjects = storedProjects ? JSON.parse(storedProjects) : [];
-
+  
+    // Initialize the projects array
+    this.projects = allProjects;
+  
     if (this.username) {
+      // Initialize the userProjects array based on the logged-in user
       this.userProjects = allProjects.filter(
         (project: any) =>
           project.createdBy &&
@@ -33,6 +35,38 @@ export class ProjectListComponent implements OnInit {
       );
     }
   }
+  
+  
+  editProject(project: any) {
+    console.log('Editing project:', project);
+    this.selectedProject = { ...project }; // Ensure a copy is made
+    this.isEditing = true;
+    console.log('Selected Project:', this.selectedProject);
+  }
+  
+  updateProject() {
+    console.log('Updating project:', this.selectedProject);
+  
+    const index = this.projects.findIndex((p: { id: any; }) => p.id === this.selectedProject.id);
+    if (index !== -1) {
+      this.projects[index] = { ...this.selectedProject };  // Update the project
+      localStorage.setItem('projectData', JSON.stringify(this.projects));
+  
+      // Trigger change detection by reassigning the projects array to a new reference
+      this.projects = [...this.projects]; // Create a new reference for Angular to detect
+      this.userProjects = this.projects.filter((project: any) =>
+        project.createdBy &&
+        project.createdBy.trim().toLowerCase() === this.username?.trim().toLowerCase()
+      );
+      
+      alert('Project updated successfully!');
+    }
+  
+    this.isEditing = false; // Close the form after the update
+  }
+  
+
+  
 
   logout(): void {
     localStorage.removeItem('username');
@@ -78,6 +112,7 @@ export class ProjectListComponent implements OnInit {
     }
   }
 
+  
 
   isLoggedIn(): boolean {
     return !!localStorage.getItem('username');

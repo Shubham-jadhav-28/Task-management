@@ -15,6 +15,6 @@ export const routes: Routes = [
     {path:'project',component:ProjectComponent},
     {path:'project-list',component:ProjectListComponent},
     { path: 'task-list', component: TaskListComponent },
-    {path:'project-details',component:ProjectDetailsComponent},
+   
     {path:'task-details',component:TaskDetailsComponent}
 ]

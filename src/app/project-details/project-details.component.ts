@@ -49,21 +49,6 @@ export class ProjectDetailsComponent implements OnInit {
     
   }
   
-  editProject() {
-    if (!this.selectedProject) return;
-    this.isEditing = true;
-  }
-
-  updateProject() {
-    const index = this.projects.findIndex(p => p.id === this.selectedProject.id);
-    if (index !== -1) {
-      this.projects[index] = { ...this.selectedProject };
-      localStorage.setItem('projectData', JSON.stringify(this.projects));
-    }
-
-    this.isEditing = false;
-  }
-
 
   closeProjectDetails() {
     this.router.navigate(['/project-list']); 
