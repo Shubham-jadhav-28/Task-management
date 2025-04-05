@@ -13,6 +13,7 @@ import { ProjectService } from '../services/project.service';
 })
 export class ProjectComponent {
   projects = {
+    id:'',
     title: '',
     description: '',
     createdBy: '',

@@ -3,19 +3,50 @@
     <h2 class="text-center mb-3">Login</h2>
 
     <div class="text-center mb-3">
-      <img
-        src="avtar.jpg"
-        alt="Login Image"
-        class="rounded-circle"
-        height="100px"
-        width="100px"
-      />
+    
+      <div class="image-preview">
+        <img
+          [src]="userImageUrl"
+          alt="User Image"
+          class="rounded-circle"
+          height="100px"
+          width="100px"
+          style="object-fit: cover;"
+        />
+      </div>
+    
+      
+      <div class="mb-3">
+        <label for="imageUpload" class="btn btn-outline-primary">
+          <i class="bi bi-upload"></i> Upload Image
+        </label>
+        <input
+          id="imageUpload"
+          type="file"
+          (change)="onImageChange($event)"
+          class="form-control-file"
+          hidden
+        />
+      </div>
+    
+    
+      <button
+        *ngIf="userImageUrl && userImageUrl !== 'assests/avtar.jpg'"
+        class="btn btn-danger "
+        (click)="removeImage()">
+        <i class="bi bi-trash"></i> Remove Image
+      </button>
     </div>
+    
+
+    <!-- Display welcome message if logged in -->
     <div *ngIf="isLoggedIn()" class="alert-success text-center mt-3">
       <p>Welcome, {{ getUsername() }}!</p>
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
     </div>
-    <!-- Login Form -->
-    <form (ngSubmit)="login()">
+
+   
+    <form *ngIf="!isLoggedIn()" (ngSubmit)="login()">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input
@@ -44,10 +75,7 @@
         />
       </div>
 
-      <div
-        *ngIf="passwordInput.invalid && passwordInput.touched"
-        class="text-danger"
-      >
+      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-danger">
         <p *ngIf="passwordInput.errors?.['required']">Password is required.</p>
         <p *ngIf="passwordInput.errors?.['minlength']">
           Enter at least a 6-digit password.
@@ -58,26 +86,16 @@
         type="submit"
         class="btn btn-primary w-100"
         [disabled]="!username || !password"
-        (click)="login()"
-        (keydown.enter)="login()"
-        routerLink="/project-details"
-        routerLinkActive="active-link"
       >
         Login
       </button>
     </form>
 
+  
     <div class="text-center mt-3">
       <p>
         Don't have an account?
-        <a
-          class="text-primary"
-          routerLinkActive="active-link"
-          [routerLinkActiveOptions]="{ exact: true }"
-          routerLink="signUp"
-          (click)="goToSignUp()"
-          >Sign Up</a
-        >
+        <a class="text-primary" routerLink="signUp" (click)="goToSignUp()">Sign Up</a>
       </p>
     </div>
   </div>

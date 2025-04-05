@@ -43,8 +43,8 @@
       </thead>
       <tbody>
         <tr
-          *ngFor="let project of userProjects"
-          (click)="viewProjectDetails(project)"
+          *ngFor="let project of userProjects ,let i = index" 
+          (click)="viewProjectDetails(project,i)"
           class="text-center fs-6"
           style="cursor: pointer"
         >
