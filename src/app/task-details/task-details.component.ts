@@ -22,32 +22,24 @@ export class TaskDetailsComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
- 
     const selected = localStorage.getItem('selectedProject');
     this.selectedProject = selected ? JSON.parse(selected) : null;
-
- 
+  
     const storedTasks = localStorage.getItem('tasks');
     const allTasks = storedTasks ? JSON.parse(storedTasks) : [];
-
-    
-    if (this.selectedProject) {
+  
+    const username = localStorage.getItem('username'); 
+  
+    if (this.selectedProject && username) {
       const selectedTitle = this.selectedProject.title?.trim().toLowerCase();
       this.projectTasks = allTasks.filter(
         (task: any) =>
-          task.projectTitle?.trim().toLowerCase() === selectedTitle
+          task.projectTitle?.trim().toLowerCase() === selectedTitle &&
+          task.createdBy?.trim().toLowerCase() === username.trim().toLowerCase()
       );
     }
-    // const savedTasks = localStorage.getItem('project-details');
-    // if (savedTasks) {
-    //   this.projectTasks = JSON.parse(savedTasks);
-    // }
-    // const deleteTask = localStorage.getItem('project-details');
-    // if (deleteTask) {
-    //   this.projectTasks = JSON.parse(deleteTask);
-    // }
-    
   }
+  
 
   filterProjectTasks(): void {
     if (this.selectedProject) {
@@ -80,7 +72,7 @@ export class TaskDetailsComponent implements OnInit {
       (task: any) =>
         task.projectTitle?.trim().toLowerCase() === selectedTitle &&
         task.title === this.editedTask.title ||
-        (task.title === this.originalTask.title &&          // Match using original title
+        (task.title === this.originalTask.title &&          
         task.description === this.originalTask.description)
     );
   
