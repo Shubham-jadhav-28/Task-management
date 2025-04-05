@@ -5,3 +5,15 @@
 .clickable-row:hover {
   background-color: #f8f9fa;
 }
+.table {
+  font-size: 1.1rem;
+}
+
+.table td,
+.table th {
+  padding: 1rem;
+}
+
+.alert {
+  font-size: 1.5rem;
+}

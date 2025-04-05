@@ -1,14 +1,14 @@
 <div class="container mt-5">
   <!-- Header Row -->
   <div
-    class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2"
+    class="d-flex justify-content-between align-items-center mb-5 border-bottom pb-3"
   >
-    <h2 class="text-primary">Project Dashboard</h2>
+    <h2 class="text-primary fs-2 fw-bold">Project Dashboard</h2>
     <div>
       <a
         routerLink="/create-project"
         (click)="AddProject()"
-        class="btn btn-primary"
+        class="btn btn-primary btn-lg"
       >
         <i class="bi bi-plus-circle"></i> Create New Project
       </a>
@@ -16,15 +16,20 @@
   </div>
 
   <!-- Welcome Message -->
-  <div *ngIf="isLoggedIn()" class="alert text-center rounded-pill shadow-sm">
+  <div
+    *ngIf="isLoggedIn()"
+    class="alert text-center rounded-pill shadow-sm fs-4 p-3 bg-light"
+  >
     <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
   </div>
 
   <!-- Project Table -->
-  <div class="table-responsive mt-4" *ngIf="!selectedProject">
-    <table class="table table-hover table-bordered align-middle shadow-sm">
-      <thead class="table-light">
-        <tr class="text-center">
+  <div class="table-responsive mt-5" *ngIf="!selectedProject">
+    <table
+      class="table table-hover table-bordered align-middle shadow rounded-4"
+    >
+      <thead class="table table-success text-center fs-5">
+        <tr>
           <th>Title</th>
           <th>Description</th>
           <th>Created By</th>
@@ -40,10 +45,12 @@
         <tr
           *ngFor="let project of userProjects"
           (click)="viewProjectDetails(project)"
-          class="table-row text-center"
+          class="text-center fs-6"
           style="cursor: pointer"
         >
-          <td>{{ project.title }}</td>
+          <td (click)="viewTaskDetails(project)" class="fw-semibold">
+            {{ project.title }}
+          </td>
           <td>{{ project.description }}</td>
           <td>{{ project.createdBy }}</td>
           <td>{{ project.manager }}</td>
@@ -52,24 +59,28 @@
           <td>{{ project.teamMembers }}</td>
           <td>{{ project.dueDate }}</td>
           <td>
-            <button
-              class="btn btn-outline-info btn-sm me-1"
-              (click)="viewDetail(); $event.stopPropagation()"
-            >
-              <i class="bi bi-eye"></i>
-            </button>
-            <button
-              class="btn btn-outline-success btn-sm me-1"
-              (click)="AddTask(); $event.stopPropagation()"
-            >
-              <i class="bi bi-plus"></i>
-            </button>
-            <button
-              class="btn btn-outline-danger btn-sm"
-              (click)="deleteProject(project); $event.stopPropagation()"
-            >
-              <i class="bi bi-trash"></i>
-            </button>
+            <div class="d-flex justify-content-center gap-2">
+              <button
+                class="btn btn-outline-info btn-sm"
+                (click)="viewDetail(); $event.stopPropagation()"
+              >
+                View
+              </button>
+
+              <button
+                class="btn btn-outline-success btn-sm"
+                (click)="AddTask(); $event.stopPropagation()"
+              >
+                Add Task
+              </button>
+
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="deleteProject(project); $event.stopPropagation()"
+              >
+                Delete
+              </button>
+            </div>
           </td>
         </tr>
       </tbody>

@@ -15,6 +15,9 @@ export class TaskDetailsComponent implements OnInit {
   allTasks: any[] = [];
   editingTaskIndex: number | null = null;
   editedTask: any = {};
+  originalTask: any;
+ 
+ 
 
   constructor(private router: Router) {}
 
@@ -35,6 +38,15 @@ export class TaskDetailsComponent implements OnInit {
           task.projectTitle?.trim().toLowerCase() === selectedTitle
       );
     }
+    // const savedTasks = localStorage.getItem('project-details');
+    // if (savedTasks) {
+    //   this.projectTasks = JSON.parse(savedTasks);
+    // }
+    // const deleteTask = localStorage.getItem('project-details');
+    // if (deleteTask) {
+    //   this.projectTasks = JSON.parse(deleteTask);
+    // }
+    
   }
 
   filterProjectTasks(): void {
@@ -49,23 +61,47 @@ export class TaskDetailsComponent implements OnInit {
   editTask(index: number): void {
     this.editingTaskIndex = index;
     this.editedTask = { ...this.projectTasks[index] }; 
+    this.originalTask = { ...this.projectTasks[index] };
+     
   }
 
   saveTask(index: number): void {
+    
     this.projectTasks[index] = { ...this.editedTask };
-
+  
+ 
+    const storedTasks = localStorage.getItem('tasks');
+    this.allTasks = storedTasks ? JSON.parse(storedTasks) : [];
+  
+    
+    const selectedTitle = this.selectedProject?.title?.trim().toLowerCase();
+    
     const taskIndex = this.allTasks.findIndex(
-      (t) => t.title === this.editedTask.title
+      (task: any) =>
+        task.projectTitle?.trim().toLowerCase() === selectedTitle &&
+        task.title === this.editedTask.title ||
+        (task.title === this.originalTask.title &&          // Match using original title
+        task.description === this.originalTask.description)
     );
-
+  
     if (taskIndex !== -1) {
+    
       this.allTasks[taskIndex] = { ...this.editedTask };
+      
+    
       localStorage.setItem('tasks', JSON.stringify(this.allTasks));
     }
+  
+    
+    this.projectTasks = this.allTasks.filter(
+      (task: any) => task.projectTitle?.trim().toLowerCase() === selectedTitle 
+     
+    );
+  
 
     this.cancelEdit();
   }
-
+  
   cancelEdit(): void {
     this.editingTaskIndex = null;
     this.editedTask = {};
@@ -73,12 +109,18 @@ export class TaskDetailsComponent implements OnInit {
 
   deleteTask(task: any): void {
     if (confirm(`Are you sure you want to delete "${task.title}"?`)) {
-      this.allTasks = this.allTasks.filter((t) => t.title !== task.id);
-      localStorage.setItem('tasks', JSON.stringify(this.allTasks));
-      this.filterProjectTasks();
+      
+      this.projectTasks = this.projectTasks.filter((t) => t.title !== task.title);
+  
+      localStorage.setItem('tasks', JSON.stringify(this.projectTasks));
     }
   }
+  
   closeProjectDetails() {
     this.router.navigate(['/project-list']); 
+  }
+
+  createTask(): void {
+    this.router.navigate(['/task-list']);
   }
 }

@@ -48,7 +48,7 @@ export class ProjectComponent {
     alert('Project Created!');
 
 
-    this.router.navigate(['/project-details']);
+    this.router.navigate(['/project-list']);
   }
 
 

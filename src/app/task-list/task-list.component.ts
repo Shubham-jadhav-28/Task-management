@@ -29,7 +29,7 @@ export class TaskListComponent {
     const username = localStorage.getItem('username');
   
     this.task.projectTitle = selectedProject.title;
-    this.task.projectId = selectedProject.id; // Optional but useful
+    this.task.projectId = selectedProject.id; 
     this.task.createdBy = username || 'Unknown User';
   
     const storedTasks = localStorage.getItem('tasks');

@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProjectService {
+  getProjectById(_projectId: string): any {
+    throw new Error('Method not implemented.');
+  }
   private projects: any[] = []; // Store projects
 
   constructor() {}
@@ -15,4 +18,15 @@ export class ProjectService {
   addProject(project: any) {
     this.projects.push(project);
   }
+
+  private selectedProject: any;
+
+  setSelectedProject(project: any) {
+    this.selectedProject = project;
+  }
+
+  getSelectedProject() {
+    return this.selectedProject;
+  }
+  
 }

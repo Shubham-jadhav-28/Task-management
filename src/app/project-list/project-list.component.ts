@@ -53,6 +53,9 @@ export class ProjectListComponent implements OnInit {
     this.router.navigate(['/project-details', project.id]);
     this.selectedProject = project; 
   }
+  viewTaskDetails(task: any) {
+    this.router.navigate(['/task-details']);
+  }
   closeProjectDetails() {
     this.selectedProject = null; 
     this.isEditing = false;

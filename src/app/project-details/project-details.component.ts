@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { log } from 'console';
+import { ProjectService } from '../services/project.service';
 
 @Component({
   selector: 'app-project-details',
@@ -24,7 +25,7 @@ export class ProjectDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.username = localStorage.getItem('username');
-    
+   
     const projectId = this.route.snapshot.paramMap.get('id');
     const storedProjects = localStorage.getItem('projectData');
     this.projects = storedProjects ? JSON.parse(storedProjects) : [];
@@ -44,6 +45,8 @@ export class ProjectDetailsComponent implements OnInit {
   
       console.log('Filtered projectTasks:', this.projectTasks);
     }
+    
+    
   }
   
   editProject() {
@@ -61,23 +64,6 @@ export class ProjectDetailsComponent implements OnInit {
     this.isEditing = false;
   }
 
-  updateTask(task: any) {
-    const index = this.tasks.findIndex(t => t.title === task.title);
-    if (index !== -1) {
-      this.tasks[index] = task;
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    }
-    alert('Task updated successfully!');
-  }
-
-  deleteTask(task: any) {
-    if (confirm(`Are you sure you want to delete the task "${task.title}"?`)) {
-      this.tasks = this.tasks.filter(t => t.title !== task.title);
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
-      this.projectTasks = this.projectTasks.filter(t => t.title !== task.title);
-      alert('Task deleted successfully!');
-    }
-  }
 
   closeProjectDetails() {
     this.router.navigate(['/project-list']); 
