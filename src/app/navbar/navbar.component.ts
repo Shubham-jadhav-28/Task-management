@@ -19,4 +19,5 @@ export default class NavbarComponent {
     localStorage.removeItem('user');
     this.router.navigate(['/login']);
   }
+  
 }

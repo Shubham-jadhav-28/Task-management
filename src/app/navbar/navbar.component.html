@@ -3,9 +3,16 @@
     <!-- Brand -->
     <a
       class="navbar-brand d-flex align-items-center gap-3 fw-bold text-primary fs-2"
-      href="#"
     >
-      <i class="bi bi-kanban-fill fs-1"></i> TaskFlow
+      <img
+        src="image.png"
+        alt="Logo"
+        height="40"
+        width="40"
+        class="d-inline-block align-text-top"
+      />
+
+      <i class="bi fs-1"></i> Task Management
     </a>
 
     <!-- Toggler -->
@@ -26,12 +33,15 @@
       <!-- Links -->
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
         <li class="nav-item">
-          <a class="nav-link active text-dark fs-4" aria-current="page" href="#"
+          <a
+            class="nav-link active text-dark  fs-4"
+            aria-current="page"
+            href="project-list"
             >Home</a
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark fs-4" href="#">Projects</a>
+          <a class="nav-link text-dark fs-4" href="task-details">Tasks</a>
         </li>
         <li class="nav-item dropdown">
           <a
@@ -58,14 +68,14 @@
         <div class="position-relative">
           <img
             src="avtar.jpg"
-            height="60"
-            width="60"
+            height="50"
+            width="50"
             alt="avatar"
             class="rounded-circle border border-3 border-primary shadow-lg"
             style="object-fit: cover"
           />
           <span
-            class="position-absolute top-0 start-100 translate-middle p-2 bg-success border border-light rounded-circle"
+            class="position-absolute top-0 start-100 translate-middle p-1 bg-success border border-light rounded-circle"
           >
             <span class="visually-hidden">Online</span>
           </span>
@@ -73,10 +83,10 @@
 
         <!-- Username + Logout -->
         <div class="d-flex flex-column align-items-start">
-          <span class="text fs-5">{{ username }}</span>
+          <span class="text fs-6">{{ username }}</span>
           <button
             type="button"
-            class="btn btn-outline-primary rounded-pill px-4 w-75 mt-1"
+            class="btn btn-outline-primary rounded-pill px-3 border-0 w-75 mt-0"
             (click)="logout()"
           >
             Logout

@@ -60,12 +60,12 @@
           <td>{{ project.dueDate }}</td>
           <td>
             <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-warning" (click)="editProject(project)">
+              <button class="btn btn-outline-primary " (click)="editProject(project)">
                 Edit
               </button>
 
               <button
-                class="btn btn-outline-success btn-sm"
+                class="btn btn-outline-success text-dark  btn-sm"
                 (click)="AddTask(); $event.stopPropagation()"
               >
                 Add Task
