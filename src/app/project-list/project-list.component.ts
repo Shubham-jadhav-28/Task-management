@@ -15,7 +15,10 @@ export class ProjectListComponent implements OnInit {
   selectedProject: any = null;
   username: string | null = null;
   isEditing: boolean = false;
-
+  searchQuery: string = '';
+  sortField: string = '';
+  filteredProjects: any[] = [];
+  
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
@@ -33,37 +36,61 @@ export class ProjectListComponent implements OnInit {
             this.username?.trim().toLowerCase()
       );
     }
+    this.filteredProjects = this.userProjects;
   }
 
+filterProjects() {
+  const query = this.searchQuery.toLowerCase();
+
+  this.filteredProjects = this.userProjects.filter(project =>
+    project.title.toLowerCase().includes(query) ||
+    project.manager.toLowerCase().includes(query)
+  );
+}
+
+sortProjects() {
+  if (!this.sortField) {
+    this.filteredProjects = [...this.userProjects];
+    return;
+  }
+
+  this.filteredProjects.sort((a, b) => {
+    if (a[this.sortField] < b[this.sortField]) return -1;
+    if (a[this.sortField] > b[this.sortField]) return 1;
+    return 0;
+  });
+}
   editProject(project: any) {
     this.selectedProject = { ...project };
     this.isEditing = true;
   }
 
   updateProject() {
-    const index = this.projects.findIndex(
-      (p: { id: any }) => p.id === this.selectedProject.id
+  const index = this.projects.findIndex(
+    (p: any) => p.id === this.selectedProject.id
+  );
+
+  if (index !== -1) {
+   
+    this.projects[index] = { ...this.selectedProject };
+
+ 
+    const userIndex = this.userProjects.findIndex(
+      (p: any) => p.id === this.selectedProject.id
     );
 
-    if (index !== -1) {
-      this.projects[index] = { ...this.selectedProject };
-
-      this.userProjects = this.projects.filter(
-        (project: any) =>
-          project.createdBy &&
-          project.createdBy.trim().toLowerCase() ===
-            this.username?.trim().toLowerCase()
-      );
-
-      localStorage.setItem('projectData', JSON.stringify(this.projects));
-
-      this.projects = [...this.projects];
-
-      this.cdr.detectChanges();
+    if (userIndex !== -1) {
+      this.userProjects[userIndex] = { ...this.selectedProject };
     }
 
-    this.isEditing = false;
+    
+    localStorage.setItem('projectData', JSON.stringify(this.projects));
   }
+
+  this.isEditing = false;
+  this.selectedProject = null;
+}
+
 
   cancelEdit() {
     this.isEditing = false;
@@ -115,7 +142,7 @@ export class ProjectListComponent implements OnInit {
       );
 
       localStorage.setItem('projectData', JSON.stringify(updatedProjects));
-    
+      this.filterProjects();
   }
 
   isLoggedIn(): boolean {

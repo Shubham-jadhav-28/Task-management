@@ -3,7 +3,6 @@
     <h2 class="text-center mb-3">Login</h2>
 
     <div class="text-center mb-3">
-    
       <div class="image-preview">
         <img
           [src]="userImageUrl"
@@ -11,11 +10,10 @@
           class="rounded-circle"
           height="100px"
           width="100px"
-          style="object-fit: cover;"
+          style="object-fit: cover"
         />
       </div>
-    
-      
+
       <div class="mb-3">
         <label for="imageUpload" class="btn btn-outline-primary">
           <i class="bi bi-upload"></i> Upload Image
@@ -28,16 +26,15 @@
           hidden
         />
       </div>
-    
-    
+
       <button
         *ngIf="userImageUrl && userImageUrl !== 'assests/avtar.jpg'"
-        class="btn btn-danger "
-        (click)="removeImage()">
+        class="btn btn-danger"
+        (click)="removeImage()"
+      >
         <i class="bi bi-trash"></i> Remove Image
       </button>
     </div>
-    
 
     <!-- Display welcome message if logged in -->
     <div *ngIf="isLoggedIn()" class="alert-success text-center mt-3">
@@ -45,7 +42,6 @@
       <button class="btn btn-danger" (click)="logout()">Logout</button>
     </div>
 
-   
     <form *ngIf="!isLoggedIn()" (ngSubmit)="login()">
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
@@ -75,7 +71,10 @@
         />
       </div>
 
-      <div *ngIf="passwordInput.invalid && passwordInput.touched" class="text-danger">
+      <div
+        *ngIf="passwordInput.invalid && passwordInput.touched"
+        class="text-danger"
+      >
         <p *ngIf="passwordInput.errors?.['required']">Password is required.</p>
         <p *ngIf="passwordInput.errors?.['minlength']">
           Enter at least a 6-digit password.
@@ -91,11 +90,12 @@
       </button>
     </form>
 
-  
     <div class="text-center mt-3">
       <p>
         Don't have an account?
-        <a class="text-primary" routerLink="signUp" (click)="goToSignUp()">Sign Up</a>
+        <a class="text-primary" routerLink="signUp" (click)="goToSignUp()"
+          >Sign Up</a
+        >
       </p>
     </div>
   </div>

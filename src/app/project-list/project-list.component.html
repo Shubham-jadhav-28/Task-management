@@ -18,9 +18,34 @@
   <!-- Welcome Message -->
   <div
     *ngIf="isLoggedIn()"
-    class="alert text-center rounded-pill shadow-sm fs-4 p-3 bg-light"
+    class="alert text-center rounded-pill shadow-sm fs-4 p-3 bg-info"
   >
     <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
+  </div>
+  <!-- Search and Sort Controls -->
+  <div class="row mb-4 border-1">
+    <div class="col-md-6">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by Title or Manager"
+        [(ngModel)]="searchQuery"
+        (input)="filterProjects()"
+      />
+    </div>
+    <div class="col-md-3">
+      <select
+        class="form-select"
+        [(ngModel)]="sortField"
+        (change)="sortProjects()"
+      >
+        <option value="">Sort By</option>
+        <option value="title">Title</option>
+        <option value="startDate">Start Date</option>
+        <option value="dueDate">Due Date</option>
+        <option value="manager">Manager</option>
+      </select>
+    </div>
   </div>
 
   <!-- Project Table -->
@@ -43,8 +68,8 @@
       </thead>
       <tbody>
         <tr
-          *ngFor="let project of userProjects ,let i = index" 
-          (click)="viewProjectDetails(project,i)"
+          *ngFor="let project of filteredProjects; let i = index"
+          (click)="viewProjectDetails(project, i)"
           class="text-center fs-6"
           style="cursor: pointer"
         >
@@ -60,12 +85,15 @@
           <td>{{ project.dueDate }}</td>
           <td>
             <div class="d-flex justify-content-center gap-2">
-              <button class="btn btn-outline-primary " (click)="editProject(project)">
+              <button
+                class="btn btn-outline-primary"
+                (click)="editProject(project)"
+              >
                 Edit
               </button>
 
               <button
-                class="btn btn-outline-success text-dark  btn-sm"
+                class="btn btn-outline-success text-dark btn-sm"
                 (click)="AddTask(); $event.stopPropagation()"
               >
                 Add Task
@@ -178,4 +206,21 @@
       </div>
     </form>
   </div>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li class="page-item disabled">
+        <a class="page-link">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link disabled" href="project-list">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="task-details">2</a>
+      </li>
+
+      <li class="page-item">
+        <a class="page-link" href="task-details">Next</a>
+      </li>
+    </ul>
+  </nav>
 </div>

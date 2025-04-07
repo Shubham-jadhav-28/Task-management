@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from './services/auth.service';
-import NavbarComponent from './navbar/navbar.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 
 @Component({

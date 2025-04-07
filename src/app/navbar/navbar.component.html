@@ -7,8 +7,8 @@
       <img
         src="image.png"
         alt="Logo"
-        height="40"
-        width="40"
+        height="50"
+        width="50"
         class="d-inline-block align-text-top"
       />
 
@@ -34,7 +34,7 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-4">
         <li class="nav-item">
           <a
-            class="nav-link active text-dark  fs-4"
+            class="nav-link active text-dark fs-4"
             aria-current="page"
             href="project-list"
             >Home</a
@@ -43,27 +43,18 @@
         <li class="nav-item">
           <a class="nav-link text-dark fs-4" href="task-details">Tasks</a>
         </li>
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle text-dark fs-4"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            More
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item fs-5" href="#">Settings</a></li>
-            <li><a class="dropdown-item fs-5" href="#">Profile</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li><a class="dropdown-item fs-5" href="#">Support</a></li>
-          </ul>
-        </li>
       </ul>
 
-      <!-- User Section -->
-      <div class="d-flex align-items-center gap-4">
+      <!-- Dark Mode Toggle Button -->
+      <button
+        type="button"
+        class="btn btn-outline-dark rounded-pill px-3 py-2 mx-3"
+        (click)="toggleDarkMode()"
+      >
+        🌙
+      </button>
+
+      <div class="d-flex align-items-center gap-3">
         <!-- Avatar -->
         <div class="position-relative">
           <img

@@ -110,8 +110,24 @@
       </table>
     </div>
   </ng-container>
+  <nav aria-label="Page navigation example " class="mt-4">
+    <ul class="pagination d-flex justify-content-end">
+      <li class="page-item">
+        <a class="page-link" href="project-list">Previous</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link" href="project-list">1</a>
+      </li>
+      <li class="page-item">
+        <a class="page-link disabled" href="task-details">2</a>
+      </li>
 
-  <div class="d-flex justify-content-center gap-3 mt-5">
+      <li class="page-item">
+        <a class="page-link disabled" href="task-details">Next</a>
+      </li>
+    </ul>
+  </nav>
+  <div class="d-flex justify-content-center gap-2 mt-0">
     <button
       class="btn btn-lg btn-outline-secondary"
       (click)="closeProjectDetails()"

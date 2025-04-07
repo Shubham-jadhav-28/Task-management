@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+// Removed redundant import of NavbarComponent
 
 @Component({
   selector: 'app-navbar',
@@ -7,17 +8,29 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export default class NavbarComponent {
+export  class NavbarComponent implements OnInit {
   username: string | null = null;
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+    const darkModeSetting = localStorage.getItem('darkMode');
+    if (darkModeSetting === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+  }
   
-  ngOnInit() {
-     this.username = localStorage.getItem('username');
+
+
+   isDarkMode = false;
+
+   toggleDarkMode(): void {
+    const isDarkMode = document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+  }
+  
    
-  }
-  constructor(private router: Router) {}
-  logout(): void {
-    localStorage.removeItem('user');
-    this.router.navigate(['/login']);
-  }
   
+  logout(): void {
+    localStorage.removeItem('username');
+    window.location.href = '/login'; 
+}
 }

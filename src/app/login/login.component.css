@@ -1,21 +1,19 @@
 .image-preview {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
-
 .btn-outline-primary {
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 25px;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 25px;
 }
 
 .btn-danger {
-    font-size: 14px;
-    padding: 10px 20px;
-    border-radius: 25px;
+  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 25px;
 }
 
-
 .bi {
-    margin-right: 5px;
+  margin-right: 5px;
 }

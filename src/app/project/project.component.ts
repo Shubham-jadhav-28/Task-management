@@ -25,6 +25,7 @@ export class ProjectComponent {
     tasks: []
   };
   authService: any;
+  newProjectTitle: any;
  
 
   constructor(private router: Router, private projectService: ProjectService) { }
@@ -34,25 +35,38 @@ export class ProjectComponent {
       this.projects.createdBy = username;
     }
   }
-  createProject(): void {
-
-    let projects = JSON.parse(localStorage.getItem('projectData') || '[]');
-    if (!Array.isArray(projects)) {
-      projects = [];
-    }
-
-    projects.push(this.projects);
-
-    localStorage.setItem('projectData', JSON.stringify(projects));
-
-    console.log('Project Created:', this.projects);
-    alert('Project Created!');
-
-
-    this.router.navigate(['/project-list']);
+ createProject(): void {
+  let projects = JSON.parse(localStorage.getItem('projectData') || '[]');
+  if (!Array.isArray(projects)) {
+    projects = [];
   }
 
+  const newProject = {
+    id: Date.now().toString(), 
+    title: this.projects.title,
+    description: this.projects.description,
+    createdBy: this.projects.createdBy,
+    manager: this.projects.manager,
+    startDate: this.projects.startDate,
+    endDate: this.projects.endDate,
+    teamMembers: this.projects.teamMembers,
+    dueDate: this.projects.dueDate,
+    tasks: []
+  };
 
+  projects.push(newProject);   
+
+  localStorage.setItem('projectData', JSON.stringify(projects));
+
+  console.log('Project Created:', newProject);
+  alert('Project Created!');
+
+  this.router.navigate(['/project-list']);
+}
+
+
+  
+  
   cancelProject() {
     this.router.navigate(['/project-list'])
   }
