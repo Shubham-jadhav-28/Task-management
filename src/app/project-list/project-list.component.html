@@ -17,11 +17,16 @@
 
   <!-- Welcome Message -->
   <div
-    *ngIf="isLoggedIn()"
+    *ngIf="isLoggedIn(); else noTasks"
     class="alert text-center rounded-pill shadow-sm fs-4 p-3 bg-info"
   >
     <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
   </div>
+  <ng-template #noTasks>
+    <div class="alert alert-info text-center mt-5" style="font-size: 1.5rem">
+      No project assigned yet 🚀
+    </div>
+  </ng-template>
   <!-- Search and Sort Controls -->
   <div class="row mb-4 border-1">
     <div class="col-md-6">
@@ -47,7 +52,6 @@
       </select>
     </div>
   </div>
-
   <!-- Project Table -->
   <div class="table-responsive mt-5" *ngIf="!selectedProject">
     <table
@@ -111,6 +115,7 @@
       </tbody>
     </table>
   </div>
+
   <!-- Edit Project Form -->
   <div class="card p-4 shadow-lg mt-5 bg-light" *ngIf="isEditing">
     <h2 class="mb-3 text-primary">Edit Project</h2>
