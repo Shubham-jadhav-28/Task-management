@@ -20,14 +20,14 @@ export  class NavbarComponent implements OnInit {
   
 
 
-   isDarkMode = false;
+   isDarkMode :boolean= false;
 
    toggleDarkMode(): void {
     const isDarkMode = document.body.classList.toggle('dark-mode');
     localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+    this.isDarkMode = !this.isDarkMode; 
   }
   
-   
   
   logout(): void {
     localStorage.removeItem('username');

@@ -1,5 +1,5 @@
 <div class="container d-flex justify-content-center align-items-center vh-100">
-  <div class="card p-4 shadow-lg" style="width: 350px">
+  <div class="card p-4 shadow-lg" style="width: 490px">
     <h2 class="text-center mb-3">Login</h2>
 
     <div class="text-center mb-3">
@@ -52,10 +52,16 @@
           id="username"
           [(ngModel)]="username"
           name="username"
+          #usernameInput="ngModel"
           required
         />
       </div>
-
+      <div
+        *ngIf="usernameInput.invalid && usernameInput.touched"
+        class="text-danger"
+      >
+        <p *ngIf="usernameInput.errors?.['required']">Username is required.</p>
+      </div>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input
@@ -80,14 +86,15 @@
           Enter at least a 6-digit password.
         </p>
       </div>
-
-      <button
-        type="submit"
-        class="btn btn-primary w-100"
-        [disabled]="!username || !password"
-      >
-        Login
-      </button>
+      <div class="d-flex justify-content-center">
+        <button
+          type="submit"
+          class="btn btn-primary w-25 h-25"
+          [disabled]="!username || !password"
+        >
+          Login
+        </button>
+      </div>
     </form>
 
     <div class="text-center mt-3">

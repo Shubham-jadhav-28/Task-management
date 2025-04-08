@@ -87,11 +87,33 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   deleteTask(task: any): void {
-    this.projectTasks = this.projectTasks.filter((t) => t.title !== task.title);
-
-    localStorage.setItem('tasks', JSON.stringify(this.projectTasks));
+    const storedTasks = localStorage.getItem('tasks');
+    this.allTasks = storedTasks ? JSON.parse(storedTasks) : [];
+  
+    const selectedTitle = this.selectedProject?.title?.trim().toLowerCase();
+    const username = localStorage.getItem('username')?.trim().toLowerCase();
+  
+   
+    this.allTasks = this.allTasks.filter((t: any) => {
+      return !(
+        t.projectTitle?.trim().toLowerCase() === selectedTitle &&
+        t.createdBy?.trim().toLowerCase() === username &&
+        t.title === task.title
+      );
+    });
+  
+   
+    localStorage.setItem('tasks', JSON.stringify(this.allTasks));
+  
+  
+    this.projectTasks = this.allTasks.filter((t: any) => {
+      return (
+        t.projectTitle?.trim().toLowerCase() === selectedTitle &&
+        t.createdBy?.trim().toLowerCase() === username
+      );
+    });
   }
-
+  
   closeProjectDetails() {
     this.router.navigate(['/project-list']);
   }

@@ -17,16 +17,19 @@
 
   <!-- Welcome Message -->
   <div
-    *ngIf="isLoggedIn(); else noTasks"
+    *ngIf="isLoggedIn()"
     class="alert text-center rounded-pill shadow-sm fs-4 p-3 bg-info"
   >
     <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
   </div>
-  <ng-template #noTasks>
-    <div class="alert alert-info text-center mt-5" style="font-size: 1.5rem">
-      No project assigned yet 🚀
-    </div>
-  </ng-template>
+  <div
+    *ngIf="filteredProjects.length === 0"
+    class="alert alert-info text-center mt-5"
+    style="font-size: 1.5rem"
+  >
+    No project assigned yet 🚀
+  </div>
+
   <!-- Search and Sort Controls -->
   <div class="row mb-4 border-1">
     <div class="col-md-6">
@@ -90,7 +93,7 @@
           <td>
             <div class="d-flex justify-content-center gap-2">
               <button
-                class="btn btn-outline-primary"
+                class="btn btn-outline-primary text-dark"
                 (click)="editProject(project)"
               >
                 Edit

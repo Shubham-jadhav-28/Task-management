@@ -44,7 +44,7 @@ export class AuthService {
     const users = storedUsers ? JSON.parse(storedUsers) : [];
 
     if (users.some((user: any) => user.username === username)) {
-      alert('User already exists. Please choose another username.');
+      window.alert('User already exists. Please choose another username.');
       return;
     }
 
@@ -56,11 +56,18 @@ export class AuthService {
     localStorage.setItem(this.USERNAME_KEY, username);
 
     console.log(`User ${username} registered and logged in.`);
+
+    users.push({ username, password });
+
+    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+
+    window.alert('Registration successful! You can now log in.');
+    this.router.navigate(['/login']);
   }
 
   isAuthenticated(): boolean {
     if (!isPlatformBrowser(this.platformId)) return false;
-    return !!localStorage.getItem(this.TOKEN_KEY);
+    return !!localStorage.getItem('username')
   }
 
   getUsername(): string {
@@ -83,7 +90,7 @@ export class AuthService {
 
     localStorage.removeItem(this.TOKEN_KEY);
     localStorage.removeItem(this.USERNAME_KEY);
-    localStorage.removeItem(this.USER_IMAGE_KEY); // Remove the image URL
+    localStorage.removeItem(this.USER_IMAGE_KEY);
     this.router.navigate(['/login']);
   }
 }

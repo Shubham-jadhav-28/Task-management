@@ -29,7 +29,7 @@ export class LoginComponent {
 
   logout(): void {
     this.authService.logout();
-    // Here, we can make sure we update the UI by using `isLoggedIn()` after logout.
+    this.router.navigate(['/login']);
   }
   goToSignUp(): void {
     this.router.navigate(['/register']);
@@ -42,7 +42,7 @@ export class LoginComponent {
  getUsername(): string | null {
   return this.authService.getUsername();
 }
-  // Handle image change (on file input change)
+  
   onImageChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
@@ -50,15 +50,15 @@ export class LoginComponent {
       reader.onload = () => {
         const imageUrl = reader.result as string;
         this.userImageUrl = imageUrl;
-        localStorage.setItem('userImage', imageUrl); // Store the image URL in localStorage
+        localStorage.setItem('userImage', imageUrl); 
       };
-      reader.readAsDataURL(file); // Convert image to base64 URL
+      reader.readAsDataURL(file); 
     }
   }
 
   removeImage(): void {
-    this.userImageUrl = 'avtar.jpg'; // Set back to default image
-    this.authService.setUserImage(this.userImageUrl);  // Update globally via AuthService
+    this.userImageUrl = 'avtar.jpg';
+    this.authService.setUserImage(this.userImageUrl);  
   }
 
 }

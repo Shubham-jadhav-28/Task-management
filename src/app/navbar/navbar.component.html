@@ -1,15 +1,17 @@
-<nav class="navbar navbar-expand-lg bg-white py-4 sticky-top rounded-bottom-4">
+<nav
+  class="navbar navbar-expand-lg bg-white py-4 sticky-top rounded-bottom-4 shadow-sm"
+>
   <div class="container-fluid">
-    <!-- Brand -->
+    <!-- Logo -->
     <a
       class="navbar-brand d-flex align-items-center gap-3 fw-bold text-primary fs-2"
     >
       <img
         src="image.png"
         alt="Logo"
-        height="50"
-        width="50"
-        class="d-inline-block align-text-top"
+        height="60"
+        width="60"
+        class="d-inline-block align-text-top rounded-2"
       />
 
       <i class="bi fs-1"></i> Task Management
@@ -51,7 +53,7 @@
         class="btn btn-outline-dark rounded-pill px-3 py-2 mx-3"
         (click)="toggleDarkMode()"
       >
-        🌙
+        {{ isDarkMode ? "🌙" : "☀️" }}
       </button>
 
       <div class="d-flex align-items-center gap-3">

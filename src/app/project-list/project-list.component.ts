@@ -143,6 +143,7 @@ sortProjects() {
 
       localStorage.setItem('projectData', JSON.stringify(updatedProjects));
       this.filterProjects();
+      
   }
 
   isLoggedIn(): boolean {
