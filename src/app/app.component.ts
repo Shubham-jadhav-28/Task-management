@@ -14,23 +14,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   title = 'Task-management';
-  // constructor(private authService: AuthService, private router: Router) {}
-
-  // isLoginPage(): boolean {
-  //   return this.router.url === '/login';
-  // }
-
-  // logout() {
-  //   this.authService.logout();
-  //   this.router.navigate(['/login']);
-  // }
+ 
   showNavbar = true;
 
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const hiddenRoutes = ['/login', '/register'];
-        this.showNavbar = !hiddenRoutes.includes(event.url);
+        this.showNavbar = !hiddenRoutes.some(route => event.urlAfterRedirects.startsWith(route));
       }
     });
   }
