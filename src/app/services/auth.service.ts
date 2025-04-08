@@ -52,7 +52,7 @@ export class AuthService {
     users.push(newUser);
     localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
 
-    window.alert('Registration successful! You can now log in.');
+    
     return true;
   }
 

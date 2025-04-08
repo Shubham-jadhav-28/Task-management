@@ -3,7 +3,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -18,15 +18,31 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login(): void {
-    if (this.authService.login(this.username, this.password)) {
-      localStorage.setItem('username', this.username.trim());
+ 
+login(): void {
+  if (this.authService.login(this.username, this.password)) {
+    localStorage.setItem('username', this.username.trim());
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Login successful!',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
+    });
+    setTimeout(() => {
       this.router.navigate(['/project-list']);
-    } else {
-      alert('Invalid credentials');
-    }
+    }, 1600); 
+  } else {
+ 
+    Swal.fire({
+      icon: 'error',
+      title: 'Invalid credentials',
+      text: 'Please check your username and password.',
+      confirmButtonColor: '#d33'
+    });
   }
-
+}
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

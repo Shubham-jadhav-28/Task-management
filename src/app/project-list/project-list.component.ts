@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-project-list',
@@ -144,6 +145,27 @@ sortProjects() {
 
       localStorage.setItem('projectData', JSON.stringify(updatedProjects));
       this.filterProjects();
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this project!',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',        // Red Confirm button
+        cancelButtonColor: '#3085d6',       // Blue Cancel button
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // User confirmed, delete the project
+          this.filteredProjects = this.filteredProjects.filter(p => p !== project);
+          
+          // Show success message
+          Swal.fire(
+            'Deleted!',
+            'Your project has been deleted.',
+            'success'
+          );
+        }
+      });
       
   }
 

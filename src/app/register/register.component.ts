@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-register',
   imports: [FormsModule, NgIf, RouterLink, RouterLinkActive],
@@ -20,14 +20,38 @@ export class RegisterComponent {
   register(): void {
     if (this.username && this.password && this.email) {
       const success = this.authService.register(this.username, this.password);
-
+  
       if (success) {
-        this.router.navigate(['/login']);
+        
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registration successful!',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true
+        });
+  
+       
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1600);
+  
       } else {
-        this.errorMessage = 'Registration failed. Please try again.';
+        
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Registration failed. Please try again.'
+        });
       }
     } else {
-      this.errorMessage = 'Please fill in all fields.';
+     
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Fields',
+        text: 'Please fill in all fields.'
+      });
     }
   }
 }

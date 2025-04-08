@@ -2,7 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
-
+import Swal from 'sweetalert2';  
 @Component({
   selector: 'app-task-list',
   imports: [NgFor, FormsModule, NgIf, RouterOutlet],
@@ -39,7 +39,16 @@ export class TaskListComponent {
     tasks.push(this.task);
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
-    this.router.navigate(['/task-details']);
+    Swal.fire({
+      icon: 'success',
+      title: 'Task Created!',
+      text: 'Your task has been successfully created.',
+      timer: 2000, // auto-close after 2 seconds
+      showConfirmButton: false
+    }).then(() => {
+      // After the popup closes, navigate to task details
+      this.router.navigate(['/task-details']);
+    });
   }
 
   cancelTask() {

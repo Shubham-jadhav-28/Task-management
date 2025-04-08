@@ -14,10 +14,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 })
 export class AppComponent {
   title = 'Task-management';
- 
   showNavbar = true;
-
-  constructor(private router: Router) {
+  constructor(private authService: AuthService, private router: Router) 
+ {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const hiddenRoutes = ['/login', '/register'];
@@ -25,4 +24,6 @@ export class AppComponent {
       }
     });
   }
+
+  
 }
