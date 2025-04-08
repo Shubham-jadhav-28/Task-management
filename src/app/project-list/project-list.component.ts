@@ -19,6 +19,7 @@ export class ProjectListComponent implements OnInit {
   sortField: string = '';
   filteredProjects: any[] = [];
   
+
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
