@@ -1,10 +1,11 @@
+import { NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-navbar',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
