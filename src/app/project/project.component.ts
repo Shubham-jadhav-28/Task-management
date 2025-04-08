@@ -63,9 +63,6 @@ export class ProjectComponent {
 
   this.router.navigate(['/project-list']);
 }
-
-
-  
   
   cancelProject() {
     this.router.navigate(['/project-list'])

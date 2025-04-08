@@ -37,37 +37,28 @@ export class AuthService {
     return false;
   }
 
-  register(username: string, password: string): void {
-    if (!isPlatformBrowser(this.platformId)) return;
+  register(username: string, password: string): boolean {
+    if (!isPlatformBrowser(this.platformId)) return false;
 
     const storedUsers = localStorage.getItem(this.USERS_KEY);
     const users = storedUsers ? JSON.parse(storedUsers) : [];
 
     if (users.some((user: any) => user.username === username)) {
       window.alert('User already exists. Please choose another username.');
-      return;
+      return false;
     }
 
     const newUser = { username, password };
     users.push(newUser);
     localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
 
-    localStorage.setItem(this.TOKEN_KEY, 'some-token');
-    localStorage.setItem(this.USERNAME_KEY, username);
-
-    console.log(`User ${username} registered and logged in.`);
-
-    users.push({ username, password });
-
-    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
-
     window.alert('Registration successful! You can now log in.');
-    this.router.navigate(['/login']);
+    return true;
   }
 
   isAuthenticated(): boolean {
     if (!isPlatformBrowser(this.platformId)) return false;
-    return !!localStorage.getItem('username')
+    return !!localStorage.getItem('username');
   }
 
   getUsername(): string {
