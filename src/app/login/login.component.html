@@ -14,96 +14,79 @@
         />
       </div>
 
-      <div class="mb-3">
-        <label for="imageUpload" class="btn btn-outline-primary">
-          <i class="bi bi-upload"></i> Upload Image
-        </label>
-        <input
-          id="imageUpload"
-          type="file"
-          (change)="onImageChange($event)"
-          class="form-control-file"
-          hidden
-        />
+      <!-- Display welcome message if logged in -->
+      <div *ngIf="isLoggedIn()" class="alert-success text-center mt-3">
+        <p>Welcome, {{ getUsername() }}!</p>
+        <button class="btn btn-danger" (click)="logout()">Logout</button>
       </div>
 
-      <button
-        *ngIf="userImageUrl && userImageUrl !== 'assests/avtar.jpg'"
-        class="btn btn-danger"
-        (click)="removeImage()"
-      >
-        <i class="bi bi-trash"></i> Remove Image
-      </button>
-    </div>
+      <form *ngIf="!isLoggedIn()" class="text-start" (ngSubmit)="login()">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Username"
+            id="username"
+            [(ngModel)]="username"
+            name="username"
+            #usernameInput="ngModel"
+            required
+          />
+        </div>
+        <div
+          *ngIf="usernameInput.invalid && usernameInput.touched"
+          class="text-danger"
+        >
+          <p *ngIf="usernameInput.errors?.['required']">
+            Username is required.
+          </p>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Password"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            #passwordInput="ngModel"
+            required
+            minlength="6"
+          />
+        </div>
 
-    <!-- Display welcome message if logged in -->
-    <div *ngIf="isLoggedIn()" class="alert-success text-center mt-3">
-      <p>Welcome, {{ getUsername() }}!</p>
-      <button class="btn btn-danger" (click)="logout()">Logout</button>
-    </div>
+        <div
+          *ngIf="passwordInput.invalid && passwordInput.touched"
+          class="text-danger"
+        >
+          <p *ngIf="passwordInput.errors?.['required']">
+            Password is required.
+          </p>
+          <p *ngIf="passwordInput.errors?.['minlength']">
+            Enter at least a 6-digit password.
+          </p>
+        </div>
+        <div class="d-flex justify-content-center">
+          <button
+            type="submit"
+            class="btn btn-primary w-25 h-25"
+            [disabled]="!username || !password"
+          >
+            Login
+          </button>
+        </div>
+      </form>
 
-    <form *ngIf="!isLoggedIn()" (ngSubmit)="login()">
-      <div class="mb-3">
-        <label for="username" class="form-label">Username</label>
-        <input
-          type="text"
-          class="form-control"
-          placeholder="Enter Username"
-          id="username"
-          [(ngModel)]="username"
-          name="username"
-          #usernameInput="ngModel"
-          required
-        />
-      </div>
-      <div
-        *ngIf="usernameInput.invalid && usernameInput.touched"
-        class="text-danger"
-      >
-        <p *ngIf="usernameInput.errors?.['required']">Username is required.</p>
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input
-          type="password"
-          class="form-control"
-          placeholder="Enter Password"
-          id="password"
-          [(ngModel)]="password"
-          name="password"
-          #passwordInput="ngModel"
-          required
-          minlength="6"
-        />
-      </div>
-
-      <div
-        *ngIf="passwordInput.invalid && passwordInput.touched"
-        class="text-danger"
-      >
-        <p *ngIf="passwordInput.errors?.['required']">Password is required.</p>
-        <p *ngIf="passwordInput.errors?.['minlength']">
-          Enter at least a 6-digit password.
+      <div class="text-center mt-3">
+        <p>
+          Don't have an account?
+          <a class="text-primary" routerLink="signUp" (click)="goToSignUp()"
+            >Sign Up</a
+          >
         </p>
       </div>
-      <div class="d-flex justify-content-center">
-        <button
-          type="submit"
-          class="btn btn-primary w-25 h-25"
-          [disabled]="!username || !password"
-        >
-          Login
-        </button>
-      </div>
-    </form>
-
-    <div class="text-center mt-3">
-      <p>
-        Don't have an account?
-        <a class="text-primary" routerLink="signUp" (click)="goToSignUp()"
-          >Sign Up</a
-        >
-      </p>
     </div>
   </div>
 </div>

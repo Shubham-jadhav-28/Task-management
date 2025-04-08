@@ -2,7 +2,7 @@
   <div class="card-header text-center text-primary">
     <h4 class="mb-3">Create a New Task</h4>
   </div>
-  <div class="card shadow">
+  <div class="card shadow bg-light">
     <div class="card-body">
       <form (ngSubmit)="createTask()">
         <div class="mb-3">
@@ -10,6 +10,7 @@
           <input
             type="text"
             id="taskTitle"
+            placeholder="Enter Task Title"
             class="form-control"
             [(ngModel)]="task.title"
             name="taskTitle"
@@ -23,6 +24,7 @@
             type="text"
             id="assignedUser"
             class="form-control"
+            placeholder="Enter AssignedTo"
             [(ngModel)]="task.assignedTo"
             name="assignedTo"
             required
@@ -50,6 +52,7 @@
             type="text"
             id="assignedUser"
             class="form-control"
+            placeholder="Enter Assigned User"
             [(ngModel)]="task.assignedUser"
             name="assignedUser"
             required

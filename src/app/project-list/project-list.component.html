@@ -22,13 +22,6 @@
   >
     <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
   </div>
-  <div
-    *ngIf="filteredProjects.length === 0"
-    class="alert alert-info text-center mt-5"
-    style="font-size: 1.5rem"
-  >
-    No project assigned yet 🚀
-  </div>
 
   <!-- Search and Sort Controls -->
   <div class="row mb-4 border-1">
@@ -60,7 +53,7 @@
     <table
       class="table table-hover table-bordered align-middle shadow rounded-4"
     >
-      <thead class="table table-success text-center fs-5">
+      <thead class="table table-success text-center fs-6">
         <tr>
           <th>Title</th>
           <th>Description</th>
@@ -77,7 +70,7 @@
         <tr
           *ngFor="let project of filteredProjects; let i = index"
           (click)="viewProjectDetails(project, i)"
-          class="text-center fs-6"
+          class="text-center"
           style="cursor: pointer"
         >
           <td (click)="viewTaskDetails(project)" class="fw-semibold">
@@ -117,6 +110,13 @@
         </tr>
       </tbody>
     </table>
+    <div
+      *ngIf="filteredProjects.length === 0"
+      class="alert alert-info text-center mt-4"
+      style="font-size: 1.5rem"
+    >
+      No project assigned yet 🚀
+    </div>
   </div>
 
   <!-- Edit Project Form -->
