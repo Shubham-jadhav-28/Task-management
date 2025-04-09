@@ -105,8 +105,25 @@ export class ProjectListComponent implements OnInit {
   }
 
   AddTask(): void {
+    // Create a new task
+    const newTask = {
+      title: 'Sample Task',
+      description: 'Sample Description'
+    };
+  
+    // Load existing tasks
+    const existingTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+  
+    // Add new task
+    existingTasks.push(newTask);
+  
+    // Save updated tasks back to Local Storage
+    localStorage.setItem('tasks', JSON.stringify(existingTasks));
+  
+    // THEN navigate
     this.router.navigate(['/task-list']);
   }
+  
 
   viewProjectDetails(project: any, index: number) {
     console.log('Navigating with project index:', index);
