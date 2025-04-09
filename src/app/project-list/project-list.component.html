@@ -94,7 +94,7 @@
 
               <button
                 class="btn btn-outline-success text-dark btn-sm"
-                (click)="AddTask()"
+                (click)="AddTask(); $event.stopPropagation()"
               >
                 Add Task
               </button>

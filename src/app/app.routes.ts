@@ -4,7 +4,7 @@ import { RegisterComponent } from './register/register.component';
 import { ProjectComponent } from './project/project.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { ProjectListComponent } from './project-list/project-list.component';
-import { ProjectDetailsComponent } from './project-details/project-details.component';
+
 import { TaskDetailsComponent } from './task-details/task-details.component';
 
 
