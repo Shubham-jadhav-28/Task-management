@@ -43,10 +43,10 @@ export class TaskListComponent {
       icon: 'success',
       title: 'Task Created!',
       text: 'Your task has been successfully created.',
-      timer: 2000, // auto-close after 2 seconds
+      timer: 2000, 
       showConfirmButton: false
     }).then(() => {
-      // After the popup closes, navigate to task details
+      
       this.router.navigate(['/task-details']);
     });
   }

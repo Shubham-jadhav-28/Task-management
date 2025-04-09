@@ -61,7 +61,7 @@ export class ProjectComponent {
   
     
     Swal.fire({
-      position: 'top-end',
+      
       icon: 'success',
       title: 'Project Created Successfully!',
       showConfirmButton: false,
@@ -72,7 +72,7 @@ export class ProjectComponent {
    
     setTimeout(() => {
       this.router.navigate(['/project-list']);
-    }, 1600); // wait a bit so user can see the notification
+    }, 1600); 
   }
   cancelProject() {
     this.router.navigate(['/project-list'])

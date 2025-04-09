@@ -99,7 +99,7 @@ export class TaskDetailsComponent implements OnInit {
         cancelButtonText: 'Cancel'
       }).then((result) => {
         if (result.isConfirmed) {
-          // Only delete if user confirms
+         
           const storedTasks = localStorage.getItem('tasks');
           this.allTasks = storedTasks ? JSON.parse(storedTasks) : [];
     
