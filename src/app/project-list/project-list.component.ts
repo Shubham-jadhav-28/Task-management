@@ -19,7 +19,6 @@ export class ProjectListComponent implements OnInit {
   searchQuery: string = '';
   sortField: string = '';
   filteredProjects: any[] = [];
-  
 
   constructor(private router: Router, private cdr: ChangeDetectorRef) {}
 
@@ -41,58 +40,55 @@ export class ProjectListComponent implements OnInit {
     this.filteredProjects = this.userProjects;
   }
 
-filterProjects() {
-  const query = this.searchQuery.toLowerCase();
+  filterProjects() {
+    const query = this.searchQuery.toLowerCase();
 
-  this.filteredProjects = this.userProjects.filter(project =>
-    project.title.toLowerCase().includes(query) ||
-    project.manager.toLowerCase().includes(query)
-  );
-}
-
-sortProjects() {
-  if (!this.sortField) {
-    this.filteredProjects = [...this.userProjects];
-    return;
+    this.filteredProjects = this.userProjects.filter(
+      (project) =>
+        project.title.toLowerCase().includes(query) ||
+        project.manager.toLowerCase().includes(query)
+    );
   }
 
-  this.filteredProjects.sort((a, b) => {
-    if (a[this.sortField] < b[this.sortField]) return -1;
-    if (a[this.sortField] > b[this.sortField]) return 1;
-    return 0;
-  });
-}
+  sortProjects() {
+    if (!this.sortField) {
+      this.filteredProjects = [...this.userProjects];
+      return;
+    }
+
+    this.filteredProjects.sort((a, b) => {
+      if (a[this.sortField] < b[this.sortField]) return -1;
+      if (a[this.sortField] > b[this.sortField]) return 1;
+      return 0;
+    });
+  }
   editProject(project: any) {
     this.selectedProject = { ...project };
     this.isEditing = true;
   }
 
   updateProject() {
-  const index = this.projects.findIndex(
-    (p: any) => p.id === this.selectedProject.id
-  );
-
-  if (index !== -1) {
-   
-    this.projects[index] = { ...this.selectedProject };
-
- 
-    const userIndex = this.userProjects.findIndex(
+    const index = this.projects.findIndex(
       (p: any) => p.id === this.selectedProject.id
     );
 
-    if (userIndex !== -1) {
-      this.userProjects[userIndex] = { ...this.selectedProject };
+    if (index !== -1) {
+      this.projects[index] = { ...this.selectedProject };
+
+      const userIndex = this.userProjects.findIndex(
+        (p: any) => p.id === this.selectedProject.id
+      );
+
+      if (userIndex !== -1) {
+        this.userProjects[userIndex] = { ...this.selectedProject };
+      }
+
+      localStorage.setItem('projectData', JSON.stringify(this.projects));
     }
 
-    
-    localStorage.setItem('projectData', JSON.stringify(this.projects));
+    this.isEditing = false;
+    this.selectedProject = null;
   }
-
-  this.isEditing = false;
-  this.selectedProject = null;
-}
-
 
   cancelEdit() {
     this.isEditing = false;
@@ -134,39 +130,34 @@ sortProjects() {
   }
 
   deleteProject(project: any): void {
-    
-      this.userProjects = this.userProjects.filter((p) => p !== project);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this project!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userProjects = this.userProjects.filter((p) => p !== project);
 
-      const storedProjects = localStorage.getItem('projectData');
-      const allProjects = storedProjects ? JSON.parse(storedProjects) : [];
-      const updatedProjects = allProjects.filter(
-        (p: any) => p.title !== project.title
-      );
+        const storedProjects = localStorage.getItem('projectData');
+        const allProjects = storedProjects ? JSON.parse(storedProjects) : [];
+        const updatedProjects = allProjects.filter(
+          (p: any) => p.title !== project.title
+        );
 
-      localStorage.setItem('projectData', JSON.stringify(updatedProjects));
-      this.filterProjects();
-      Swal.fire({
-        title: 'Are you sure?',
-        text: 'You will not be able to recover this project!',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',        // Red Confirm button
-        cancelButtonColor: '#3085d6',       // Blue Cancel button
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          // User confirmed, delete the project
-          this.filteredProjects = this.filteredProjects.filter(p => p !== project);
-          
-          // Show success message
-          Swal.fire(
-            'Deleted!',
-            'Your project has been deleted.',
-            'success'
-          );
-        }
-      });
-      
+        localStorage.setItem('projectData', JSON.stringify(updatedProjects));
+
+        this.filterProjects();
+        this.filteredProjects = this.filteredProjects.filter(
+          (p) => p !== project
+        );
+
+        Swal.fire('Deleted!', 'Your project has been deleted.', 'success');
+      }
+    });
   }
 
   isLoggedIn(): boolean {

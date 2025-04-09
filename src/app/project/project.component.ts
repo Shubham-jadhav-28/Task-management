@@ -4,7 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ProjectService } from '../services/project.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-project',
   imports: [RouterLink, NgIf, FormsModule],
@@ -35,35 +35,45 @@ export class ProjectComponent {
       this.projects.createdBy = username;
     }
   }
- createProject(): void {
-  let projects = JSON.parse(localStorage.getItem('projectData') || '[]');
-  if (!Array.isArray(projects)) {
-    projects = [];
-  }
-
-  const newProject = {
-    id: Date.now().toString(), 
-    title: this.projects.title,
-    description: this.projects.description,
-    createdBy: this.projects.createdBy,
-    manager: this.projects.manager,
-    startDate: this.projects.startDate,
-    endDate: this.projects.endDate,
-    teamMembers: this.projects.teamMembers,
-    dueDate: this.projects.dueDate,
-    tasks: []
-  };
-
-  projects.push(newProject);   
-
-  localStorage.setItem('projectData', JSON.stringify(projects));
-
-  console.log('Project Created:', newProject);
-  alert('Project Created!');
-
-  this.router.navigate(['/project-list']);
-}
+  createProject(): void {
+    let projects = JSON.parse(localStorage.getItem('projectData') || '[]');
+    if (!Array.isArray(projects)) {
+      projects = [];
+    }
   
+    const newProject = {
+      id: Date.now().toString(),
+      title: this.projects.title,
+      description: this.projects.description,
+      createdBy: this.projects.createdBy,
+      manager: this.projects.manager,
+      startDate: this.projects.startDate,
+      endDate: this.projects.endDate,
+      teamMembers: this.projects.teamMembers,
+      dueDate: this.projects.dueDate,
+      tasks: []
+    };
+  
+    projects.push(newProject);
+    localStorage.setItem('projectData', JSON.stringify(projects));
+  
+    console.log('Project Created:', newProject);
+  
+    
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Project Created Successfully!',
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
+    });
+  
+   
+    setTimeout(() => {
+      this.router.navigate(['/project-list']);
+    }, 1600); // wait a bit so user can see the notification
+  }
   cancelProject() {
     this.router.navigate(['/project-list'])
   }
