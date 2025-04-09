@@ -1,17 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
 
-/* html,
+html,
 body {
-  height: 100%;
-} */
-/* body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-} */
-body {
-  font-family: var(--bs-body-font-family); /* Bootstrap default */
-  font-size: var(--bs-body-font-size); /* Bootstrap default */
+  height: 90%;
 }
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+/* body {
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+} */
 
 .dark-mode {
   background-color: #121212 !important;

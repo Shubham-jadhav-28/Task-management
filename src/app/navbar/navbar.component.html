@@ -1,6 +1,6 @@
 <nav
   [ngClass]="{
-    'navbar navbar-expand-lg py-4 sticky-top  shadow-sm': true,
+    'navbar navbar-expand-lg py-2 sticky-top  shadow-sm bg-white': true,
     
   }"
 >
@@ -17,7 +17,7 @@
         class="d-inline-block align-text-top rounded-2"
       />
 
-      <i class="bi fs-5"></i> Task Management
+      <h2 class="bi fw-bold fs-4 mt-2">Task Management</h2>
     </a>
 
     <!-- Toggler -->
@@ -85,7 +85,7 @@
           <span class="text fs-6">{{ username }}</span>
           <button
             type="button"
-            class="btn btn-danger rounded-pill px-3 border-0 w-75 mt-0"
+            class="btn btn-outline-danger rounded-pill px-3 border-0 w-75 mt-1"
             (click)="logout()"
           >
             Logout

@@ -3,14 +3,14 @@
   <div
     class="d-flex justify-content-between align-items-center mb-5 border-bottom pb-3"
   >
-    <h2 class="text-primary fs-2 fw-bold">Project Dashboard</h2>
+    <h2 class="text-primary fs-4 fw-bold">Project Dashboard</h2>
     <div>
       <a
         routerLink="/create-project"
         (click)="AddProject()"
-        class="btn btn-primary btn-lg"
+        class="btn btn-success d-flex align-items-center gap-2 px-4"
       >
-        <i class="bi bi-plus-circle"></i> Create New Project
+        <i class="bi bi-plus-circle"></i> New Project
       </a>
     </div>
   </div>
@@ -18,7 +18,7 @@
   <!-- Welcome Message -->
   <div
     *ngIf="isLoggedIn()"
-    class="alert text-center rounded-pill shadow-sm fs-4 p-3 bg-info"
+    class="alert text-center rounded-pill shadow-sm fs-6 p-3 bg-info"
   >
     <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
   </div>
@@ -73,18 +73,18 @@
           class="text-center"
           style="cursor: pointer"
         >
-          <td (click)="viewTaskDetails(project)" class="fw-semibold">
+          <td (click)="viewTaskDetails(project)" class="fw-semibold fs-6">
             {{ project.title }}
           </td>
-          <td>{{ project.description }}</td>
-          <td>{{ project.createdBy }}</td>
-          <td>{{ project.manager }}</td>
-          <td>{{ project.startDate }}</td>
-          <td>{{ project.endDate }}</td>
-          <td>{{ project.teamMembers }}</td>
-          <td>{{ project.dueDate }}</td>
+          <td class="fs-6">{{ project.description }}</td>
+          <td class="fs-6">{{ project.createdBy }}</td>
+          <td class="fs-6">{{ project.manager }}</td>
+          <td class="fs-6">{{ project.startDate }}</td>
+          <td class="fs-6">{{ project.endDate }}</td>
+          <td class="fs-6">{{ project.teamMembers }}</td>
+          <td class="fs-6">{{ project.dueDate }}</td>
           <td>
-            <div class="d-flex justify-content-center gap-2">
+            <div class="d-flex justify-content-center gap-1">
               <button
                 class="btn btn-outline-primary text-dark"
                 (click)="editProject(project)"
