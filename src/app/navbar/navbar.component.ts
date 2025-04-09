@@ -41,7 +41,7 @@ export class NavbarComponent implements OnInit {
         localStorage.removeItem('username');
 
         Swal.fire({
-          position: 'top-end',
+          
           icon: 'success',
           title: 'Logged out successfully!',
           showConfirmButton: false,

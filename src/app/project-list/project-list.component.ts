@@ -45,7 +45,7 @@ export class ProjectListComponent implements OnInit {
 
     this.filteredProjects = this.userProjects.filter(
       (project) =>
-        project.title.toLowerCase().includes(query) ||
+        project.title.toLowerCase().includes(query) || 
         project.manager.toLowerCase().includes(query)
     );
   }

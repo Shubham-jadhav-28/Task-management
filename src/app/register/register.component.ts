@@ -24,7 +24,7 @@ export class RegisterComponent {
       if (success) {
         
         Swal.fire({
-          position: 'top-end',
+      
           icon: 'success',
           title: 'Registration successful!',
           showConfirmButton: false,

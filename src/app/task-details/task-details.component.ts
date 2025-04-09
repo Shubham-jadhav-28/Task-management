@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';  
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-task-details',
   imports: [CommonModule, FormsModule],
@@ -87,52 +87,45 @@ export class TaskDetailsComponent implements OnInit {
   }
 
   deleteTask(task: any): void {
-    
-      Swal.fire({
-        title: 'Are you sure?',
-        text: `Do you really want to delete the task "${task.title}"?`,
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',      
-        cancelButtonColor: '#3085d6',     
-        confirmButtonText: 'Yes, delete it!',
-        cancelButtonText: 'Cancel'
-      }).then((result) => {
-        if (result.isConfirmed) {
-         
-          const storedTasks = localStorage.getItem('tasks');
-          this.allTasks = storedTasks ? JSON.parse(storedTasks) : [];
-    
-          const selectedTitle = this.selectedProject?.title?.trim().toLowerCase();
-          const username = localStorage.getItem('username')?.trim().toLowerCase();
-    
-          this.allTasks = this.allTasks.filter((t: any) => {
-            return !(
-              t.projectTitle?.trim().toLowerCase() === selectedTitle &&
-              t.createdBy?.trim().toLowerCase() === username &&
-              t.title === task.title
-            );
-          });
-    
-          localStorage.setItem('tasks', JSON.stringify(this.allTasks));
-    
-          this.projectTasks = this.allTasks.filter((t: any) => {
-            return (
-              t.projectTitle?.trim().toLowerCase() === selectedTitle &&
-              t.createdBy?.trim().toLowerCase() === username
-            );
-          });
-    
-         
-          Swal.fire(
-            'Deleted!',
-            'The task has been deleted.',
-            'success'
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you really want to delete the task "${task.title}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const storedTasks = localStorage.getItem('tasks');
+        this.allTasks = storedTasks ? JSON.parse(storedTasks) : [];
+
+        const selectedTitle = this.selectedProject?.title?.trim().toLowerCase();
+        const username = localStorage.getItem('username')?.trim().toLowerCase();
+
+        this.allTasks = this.allTasks.filter((t: any) => {
+          return !(
+            t.projectTitle?.trim().toLowerCase() === selectedTitle &&
+            t.createdBy?.trim().toLowerCase() === username &&
+            t.title === task.title
           );
-        }
-      });
+        });
+
+        localStorage.setItem('tasks', JSON.stringify(this.allTasks));
+
+        this.projectTasks = this.allTasks.filter((t: any) => {
+          return (
+            t.projectTitle?.trim().toLowerCase() === selectedTitle &&
+            t.createdBy?.trim().toLowerCase() === username
+          );
+        });
+
+        Swal.fire('Deleted!', 'The task has been deleted.', 'success');
+      }
+    });
   }
-  
+
   closeProjectDetails() {
     this.router.navigate(['/project-list']);
   }

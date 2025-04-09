@@ -4,6 +4,10 @@
     class="d-flex justify-content-between align-items-center mb-5 border-bottom pb-3"
   >
     <h2 class="text-primary fs-4 fw-bold">Project Dashboard</h2>
+    <!-- Welcome Message -->
+    <div *ngIf="isLoggedIn()" class="alert text-center text-primary fs-6">
+      <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
+    </div>
     <div>
       <a
         routerLink="/create-project"
@@ -15,16 +19,8 @@
     </div>
   </div>
 
-  <!-- Welcome Message -->
-  <div
-    *ngIf="isLoggedIn()"
-    class="alert text-center rounded-pill shadow-sm fs-6 p-3 bg-info"
-  >
-    <h4 class="mb-0">Welcome, {{ getUsername() }}!</h4>
-  </div>
-
   <!-- Search and Sort Controls -->
-  <div class="row mb-4 border-1">
+  <div class="row">
     <div class="col-md-6">
       <input
         type="text"
@@ -49,70 +45,78 @@
     </div>
   </div>
   <!-- Project Table -->
-  <div class="table-responsive mt-5" *ngIf="!selectedProject">
-    <table
-      class="table table-hover table-bordered align-middle shadow rounded-4"
-    >
-      <thead class="table table-success text-center fs-6">
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Created By</th>
-          <th>Manager</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Team Members</th>
-          <th>Due Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          *ngFor="let project of filteredProjects; let i = index"
-          (click)="viewProjectDetails(project, i)"
-          class="text-center"
-          style="cursor: pointer"
-        >
-          <td (click)="viewTaskDetails(project)" class="fw-semibold fs-6">
-            {{ project.title }}
-          </td>
-          <td class="fs-6">{{ project.description }}</td>
-          <td class="fs-6">{{ project.createdBy }}</td>
-          <td class="fs-6">{{ project.manager }}</td>
-          <td class="fs-6">{{ project.startDate }}</td>
-          <td class="fs-6">{{ project.endDate }}</td>
-          <td class="fs-6">{{ project.teamMembers }}</td>
-          <td class="fs-6">{{ project.dueDate }}</td>
-          <td>
-            <div class="d-flex justify-content-center gap-1">
-              <button
-                class="btn btn-outline-primary text-dark"
-                (click)="editProject(project)"
-              >
-                Edit
-              </button>
+  <div class="table-responsive mt-3" *ngIf="!selectedProject">
+    <div class="custom-table-wrapper">
+      <table
+        class="table table-hover table-bordered align-middle shadow rounded-4"
+      >
+        <thead class="table table-success text-center fs-6">
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created By</th>
+            <th>Manager</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Team Members</th>
+            <th>Due Date</th>
+            <th style="min-width: 250px">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let project of filteredProjects; let i = index"
+            (click)="viewProjectDetails(project, i)"
+            class="text-center"
+            style="cursor: pointer"
+          >
+            <td (click)="viewTaskDetails(project)" class="fw-semibold fs-6">
+              {{ project.title }}
+            </td>
+            <td class="fs-6">{{ project.description }}</td>
+            <td class="fs-6">{{ project.createdBy }}</td>
+            <td class="fs-6">{{ project.manager }}</td>
+            <td class="fs-6" style="white-space: nowrap">
+              {{ project.startDate }}
+            </td>
+            <td class="fs-6" style="white-space: nowrap">
+              {{ project.endDate }}
+            </td>
+            <td class="fs-6">{{ project.teamMembers }}</td>
+            <td class="fs-6" style="white-space: nowrap">
+              {{ project.dueDate }}
+            </td>
+            <td>
+              <div class="d-flex justify-content-center flex-wrap gap-1">
+                <button
+                  class="btn btn-outline-primary text-dark"
+                  (click)="editProject(project)"
+                >
+                  Edit
+                </button>
 
-              <button
-                class="btn btn-outline-success text-dark btn-sm"
-                (click)="AddTask(); $event.stopPropagation()"
-              >
-                Add Task
-              </button>
+                <button
+                  class="btn btn-outline-success text-dark btn-sm"
+                  (click)="AddTask(); $event.stopPropagation()"
+                >
+                  Add Task
+                </button>
 
-              <button
-                class="btn btn-outline-danger btn-sm"
-                (click)="deleteProject(project); $event.stopPropagation()"
-              >
-                Delete
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  (click)="deleteProject(project); $event.stopPropagation()"
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div
       *ngIf="filteredProjects.length === 0"
-      class="alert alert-info text-center mt-4"
+      class="alert text-center mt-4"
       style="font-size: 1.5rem"
     >
       No project assigned yet 🚀
@@ -123,7 +127,7 @@
   <div class="card p-4 shadow-lg mt-5 bg-light" *ngIf="isEditing">
     <h2 class="mb-3 text-primary">Edit Project</h2>
     <form (ngSubmit)="updateProject()">
-      <div class="row g-3">
+      <div class="row">
         <div class="col-md-6">
           <label class="form-label">Title</label>
           <input

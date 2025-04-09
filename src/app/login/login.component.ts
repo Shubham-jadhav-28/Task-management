@@ -23,7 +23,7 @@ login(): void {
   if (this.authService.login(this.username, this.password)) {
     localStorage.setItem('username', this.username.trim());
     Swal.fire({
-      position: 'top-end',
+     
       icon: 'success',
       title: 'Login successful!',
       showConfirmButton: false,

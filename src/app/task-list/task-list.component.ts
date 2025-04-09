@@ -52,6 +52,6 @@ export class TaskListComponent {
   }
 
   cancelTask() {
-    this.router.navigate(['/project-list']);
+    this.router.navigate(['/task-details']);
   }
 }
