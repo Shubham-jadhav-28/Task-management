@@ -37,7 +37,8 @@ export class TaskDetailsComponent implements OnInit {
       );
     }
   }
-
+      
+  
   filterProjectTasks(): void {
     if (this.selectedProject) {
       const selectedTitle = this.selectedProject.title?.trim().toLowerCase();
