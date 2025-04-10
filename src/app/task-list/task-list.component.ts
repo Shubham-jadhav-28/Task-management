@@ -36,7 +36,7 @@ export class TaskListComponent {
     const storedTasks = localStorage.getItem('tasks');
     let tasks = storedTasks ? JSON.parse(storedTasks) : [];
 
-    tasks.push(this.task);
+    tasks.push({...this.task});
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
     Swal.fire({
