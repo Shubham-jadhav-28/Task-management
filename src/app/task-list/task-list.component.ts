@@ -1,5 +1,5 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { NgFor, NgIf  } from '@angular/common';
+import { Component ,OnInit} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import Swal from 'sweetalert2';  
@@ -9,18 +9,30 @@ import Swal from 'sweetalert2';
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css',
 })
-export class TaskListComponent {
-  task = {
-    title: '',
-    assignedTo: '',
-    status: 'Medium',
-    assignedUser: '',
-    estimate: 0,
-    timeSpent: 0,
-    projectTitle: '',
-    projectId: '',
-    createdBy: '',
-  };
+export class TaskListComponent implements OnInit {
+
+task : any ;
+  ngOnInit(): void {
+    this.task = {
+      title: '',
+      assignedTo: '',
+      status: 'Medium',
+      assignedUser: '',
+      estimate: 0,
+      timeSpent: 0,
+      projectTitle: '',
+      projectId: '',
+      createdBy: '',
+    };
+
+    const storedTasks = localStorage.getItem('tasks');
+    let tasks = storedTasks ? JSON.parse(storedTasks) : [];
+
+    tasks.push(this.task);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+
+  }
+
 
   constructor(private router: Router) {}
   createTask(): void {
