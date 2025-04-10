@@ -24,13 +24,13 @@ export class TaskDetailsComponent implements OnInit {
     this.selectedProject = selected ? JSON.parse(selected) : null;
 
     const storedTasks = localStorage.getItem('tasks');
-    const allTasks = storedTasks ? JSON.parse(storedTasks) : [];
+    this.allTasks = storedTasks ? JSON.parse(storedTasks) : [];
 
     const username = localStorage.getItem('username');
 
     if (this.selectedProject && username) {
       const selectedTitle = this.selectedProject.title?.trim().toLowerCase();
-      this.projectTasks = allTasks.filter(
+      this.projectTasks = this.allTasks.filter(
         (task: any) =>
           task.projectTitle?.trim().toLowerCase() === selectedTitle &&
           task.createdBy?.trim().toLowerCase() === username.trim().toLowerCase()

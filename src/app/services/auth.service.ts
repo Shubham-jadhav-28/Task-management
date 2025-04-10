@@ -44,7 +44,7 @@ export class AuthService {
     const users = storedUsers ? JSON.parse(storedUsers) : [];
 
     if (users.some((user: any) => user.username === username)) {
-      window.alert('User already exists. Please choose another username.');
+      
       return false;
     }
 

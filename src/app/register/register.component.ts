@@ -41,8 +41,8 @@ export class RegisterComponent {
         
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
-          text: 'Registration failed. Please try again.'
+          title: 'User Already Exists',
+          text: 'A user with this username already exists. Please choose a different username.',
         });
       }
     } else {
