@@ -12,7 +12,7 @@ export class AuthService {
   private readonly USER_IMAGE_KEY = 'userImage';
 
   constructor(
-    private router: Router,
+    private router: Router, 
     @Inject(PLATFORM_ID) private platformId: object
   ) {}
 
